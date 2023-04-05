@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Navbar from './navbar'
+import Footer from './footer'
 import styles from '@/styles/Home.module.css'
 
 export default function Layout({children, pageName}: {children: any, pageName: String}) {
@@ -14,7 +15,7 @@ export default function Layout({children, pageName}: {children: any, pageName: S
             <main className={styles.main}>
                 {children}
             </main>
-            <footer />
+            <Footer />
         </>
     )
 }
