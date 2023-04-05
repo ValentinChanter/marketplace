@@ -93,6 +93,12 @@ button.searchButton:hover {
     cursor: pointer;
 }
 
+button.searchButton:active {
+    background-color: #666666;
+    box-shadow: 0 0 3px #474747;
+    cursor: pointer;
+}
+
 div.searchButtonDiv {
     margin: auto;
     width: 30px;
