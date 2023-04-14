@@ -1,26 +1,12 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { prisma } from '@/db';
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-
-  fetch('https://dummyjson.com/products').then(e => e.json()).then((data) => {
-    setTimeout(() => {
-      res.status(200).json(data)
-    }, 1500) // simulate 1.5 time to response
-  }).catch((e) => {
-    res.status(500).json({message: e.message})
-  })
-  
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+  ) {
+  const products = await prisma.product.findMany();
+  res.status(200).json(products);
 }
-
-// axios.get('https://dummyjson.com/products',{
-//     validateStatus: function (status){
-//         return status >= 500; 
-//     },
-// }).then((response)=> {
-//     console.log(response.data);
-// });

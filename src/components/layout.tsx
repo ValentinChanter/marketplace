@@ -12,7 +12,7 @@ export default function Layout({children, pageName}: {children: any, pageName: S
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar pageName={pageName}/>
-            <main className={styles.main}>
+            <main className='bg-stone-100 px-28 py-20'>
                 {children}
             </main>
             <Footer />

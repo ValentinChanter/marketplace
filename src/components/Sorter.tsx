@@ -23,10 +23,10 @@ export const Sorter = ({products}) => {
         <div>
             <div>
                 <Dropdown isButton values={['croissant','decroissant']} onSelect={handleDropdown}>
-                    <button> filtrer </button>
+                    <button className="bg-stone-500 shadow-md rounded-lg text-white px-2 py-1"> filtrer </button>
                 </Dropdown>
             </div>
-            <div>
+            <div className="flex flex-wrap justify-evenly gap-4 f-full pt-2">
                 {data.map((product:any) =>(
                     <ProductCard key={product.id} product={product}/>
                 ))}

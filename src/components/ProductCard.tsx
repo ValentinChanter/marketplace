@@ -1,19 +1,17 @@
 import {FC} from 'react'
-import styles from '@/styles/Home.module.css'
 import Link from 'next/link';
 
 
 export const ProductCard: FC<{product:any}> = ({product}) => {
     const name = product.name;
-    const desc = product.desc; 
-    const price = product.price;
+    // const price = product.price;
     const thumbnail = product.thumbnail;
-    const material = product.material;
-    const coptegory = product.category;
+    // const material = product.material;
+    // const category = product.category;
     return (
-        <div className={styles.card}>
-            <img src={thumbnail} alt={name} />
-            <div>
+        <div className="bg-white shadow-md rounded-lg max-w-md w-3/12 text-gray-800 mt-2 mb-2 flex flex-col bg-clip-border">
+            <img src={thumbnail} alt={name} className="w-auto max-h-48 object-cover rounded-lg" />
+            <div className="font-medium text-center">
                 <Link href={{
                     pathname: 'product/[id]',
                     query:{
@@ -24,8 +22,10 @@ export const ProductCard: FC<{product:any}> = ({product}) => {
             </div>
             <div>
                 <div>
-                    {price}€
+                    {/* {price}€ */}
                 </div>
+
+                <button> Add to cart</button>
             </div>
         </div>
     )

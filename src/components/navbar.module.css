@@ -48,7 +48,7 @@ div.searchBar {
     width: 70%;
 }
 
-form.searchForm {
+div.searchForm {
     display: flex;
     width: 65%;
     height: 100%;

@@ -10,7 +10,7 @@ export const useOuterClick = (callback: (ev:any) => void) => {
         document.addEventListener("click", handleClick);
         return() => document.removeEventListener("click", handleClick);
         function handleClick(e:any){
-            if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.trager)
+            if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)
             ) callbackRef.current(e);
         }
     }, []);

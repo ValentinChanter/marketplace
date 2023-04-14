@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useState, useEffect} from 'react'
 import {useOuterClick} from '../lib/hooks'
 
 type DropdownProps = {
@@ -9,13 +9,13 @@ type DropdownProps = {
     onSelect:(value:string) => void
 }
 
-export const Dropdown: FC<DropdownProps> = ({children, isMouse, isButton, values, onSelect}) => {
-    const ref = useOuterClick(ev => { // if click outside of component
+export const Dropdown: FC<DropdownProps> = ({children, isMouse = false, isButton, values, onSelect}) => {
+    const ref = useOuterClick(ev => { // if click outside of component        
         setActive(false)
     })
-    const[active, setActive] = useState(false) // show/hide dropdown element
+    const [active, setActive] = useState(false) // show/hide dropdown element
     const onMoveOut = () => { // if the mouse move out of the zone, it's not active anymore
-        if(isMouse){
+        if(isMouse){            
             setActive(false)
         }
     }
@@ -25,11 +25,11 @@ export const Dropdown: FC<DropdownProps> = ({children, isMouse, isButton, values
         }
     }
     const onClick = () => { 
-        if(isButton){
-            setActive(old => !old)
+        if(isButton){            
+            setActive(old => !old)            
         }
     }
-    const onSelectItem = (value:string) => {
+    const onSelectItem = (value:string) => {        
         setActive(false) // close dropdown
         onSelect(value) 
     }
@@ -40,9 +40,9 @@ export const Dropdown: FC<DropdownProps> = ({children, isMouse, isButton, values
                 {children}
             </div>
             {active ? (
-                <div>
+                <div className="mt-2 py-2 w-48 bg-white rounded-lg absolute z-10 border" >
                     {values.map((value,i) => (
-                        <div key={i} onClick={() => onSelectItem(value)}>{value}</div>
+                        <div key={i} onClick={() => onSelectItem(value)} className="block px-4 py-2 text-gray-500 hover:text-blue-500">{value}</div>
                     ))}
                 </div>
             ): null}
