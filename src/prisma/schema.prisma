@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
+}
+
+generator client {
+	provider = "prisma-client-js"
+}
+
+model Product {
+	id            	String            	@default(cuid()) @id
+	name          	String            	@unique
+	desc          	String
+	material      	String?
+	category      	String
+	sellers       	ProductBySeller[]
+}
+
+model User {
+	id            	String            	@default(cuid()) @id
+	firstName    	String
+	lastName      	String
+	email         	String				@unique // Si un même utilisateur a deux comptes : client et pro, il devra utiliser deux adresses différentes
+	password		String
+	subscribed		Boolean				@default(false)
+	status        	Status            	@default(CLIENT)
+	products      	ProductBySeller[]
+}
+
+enum Status {
+	CLIENT
+	SELLER
+	MARKETPLACE
+	DELIVERY
+}
+
+model ProductBySeller {
+	id            	String            	@default(cuid()) @id
+	product			Product           	@relation(fields: [productId], references: [id])
+	productId  		String
+	seller			User              	@relation(fields: [sellerId], references: [id])
+	sellerId		String
+	quantity		Int
+	price			Decimal           	@db.Decimal(10, 2)
+	orders			Order[]
+}
+
+model Order {
+	id				Int					@default(autoincrement()) @id
+	price			Decimal				@db.Decimal(10, 2)
+	orderDate		DateTime
+	paid			Boolean
+	packages		Package[]
+	products		ProductBySeller[]
+}
+
+model Package {
+	id				Int					@default(autoincrement()) @id
+	length			Float
+	width			Float
+	height			Float
+	weight			Float
+	address			String
+	deliveryDate	DateTime
+	order			Order				@relation(fields: [orderId], references: [id])
+	orderId			Int
+}
