@@ -3,12 +3,18 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
+import { GetServerSideProps } from 'next'
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions, User } from '@/lib/session';
+
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home(u:any) {
+  const user:User = u.user;
+
   return (
     <>
-      <Layout pageName={"Accueil"}>
+      <Layout pageName={"Accueil"} user={user}>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
@@ -115,3 +121,15 @@ export default function Home() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = req.session.user;
+
+    return {
+      props: {
+        user: user || null,
+      },
+    };
+  }, sessionOptions
+);
