@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/useUser.js", "src/lib/useEvents.js", "src/lib/session.ts", "src/lib/fetchJson.js", "src/pages/api/login.js", "src/pages/api/logout.js", "src/pages/api/user.js"],
   "exclude": ["node_modules"]
 }
