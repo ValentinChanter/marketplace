@@ -9,9 +9,7 @@ import { sessionOptions, User } from '@/lib/session';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home(u:any) {
-  const user:User = u.user;
-
+export default function Home({user}: {user:User}) {
   return (
     <>
       <Layout pageName={"Accueil"} user={user}>

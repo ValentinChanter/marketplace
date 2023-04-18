@@ -8,10 +8,10 @@ import { GetServerSideProps } from 'next'
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions, User } from '@/lib/session';
 
-export default function Login(user:User) {
+export default function Login({user}: {user:User}) {
   // here we just check if user is already logged in and redirect to profile
   const { mutateUser } = useUser({
-    redirectTo: "/",
+    redirectTo: "/logout",
     redirectIfFound: true,
   });
 
