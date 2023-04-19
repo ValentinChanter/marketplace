@@ -16,7 +16,6 @@ model Product {
 	id            	String            	@default(cuid()) @id
 	name          	String            	@unique
 	desc          	String
-	material      	String?
 	category      	String
 	sellers       	ProductBySeller[]
 }

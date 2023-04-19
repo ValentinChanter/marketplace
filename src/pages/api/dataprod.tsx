@@ -6,7 +6,15 @@ export default async function handler(
     res: NextApiResponse
   ) {
    const productId = req.query.id?.toString();
-   const product = await prisma.product.findUnique({ where: { id: productId } });
+   const product = await prisma.productBySeller.findUnique({ 
+    where: { 
+      id: productId 
+    },
+    include: {
+      seller: true,
+      product: true,
+    },
+   });
 //   const product = await prisma.product.findMany();
   
      if (!product) {

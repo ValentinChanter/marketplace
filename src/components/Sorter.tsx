@@ -1,37 +1,53 @@
-import {useEffect, useState } from 'react'
-import { ProductCard } from './ProductCard'
-import {Dropdown} from './Dropdown'
+import { useEffect, useState } from 'react';
+import { ProductCard } from './ProductCard';
+import { Dropdown } from './Dropdown';
 
-export const Sorter = ({products}) => {
-    const [sort, setSort] = useState("")
-    const[data, setData] = useState(products)
+export const Sorter = ({ products }) => {
+  const [sort, setSort] = useState('');
+  const [category, setCategory] = useState('');
+  const [data, setData] = useState(products);
 
-    useEffect(() => {
-        if (sort === "croissant"){
-            setData(() => [...products.sort((a,b) => a.price - b.price)])
-        }
-
-        if (sort === "decroissant"){
-            setData(() => [...products.sort((a,b) => b.price - a.price)])
-        }
-    })
-
-    const handleDropdown = (value:string) => {
-        setSort(value)
+  useEffect(() => {
+    let filteredProducts = products;
+    if (category) {
+      filteredProducts = products.filter((product) => product.product.category === category);
     }
-    return(
-        <div>
-            <div>
-                <Dropdown isButton values={['croissant','decroissant']} onSelect={handleDropdown}>
-                    <button className="bg-stone-500 shadow-md rounded-lg text-white px-2 py-1"> filtrer </button>
-                </Dropdown>
-            </div>
-            <div className="flex flex-wrap justify-evenly gap-4 f-full pt-2">
-                {data.map((product:any) =>(
-                    <ProductCard key={product.id} product={product}/>
-                ))}
-            </div>
-        </div>
-    )
+    if (sort === 'croissant') {
+      filteredProducts.sort((a, b) => a.product.price - b.product.price);
+    } else if (sort === 'decroissant') {
+      filteredProducts.sort((a, b) => b.product.price - a.product.price);
+    }
+    setData([...filteredProducts]);
+  }, [category, sort, products]);
 
-}
+  const handleDropdown = (value) => {
+    setSort(value);
+  };
+
+  const handleCategory = (value) => {
+    setCategory(value);
+  };
+
+
+  return (
+    <div>
+      <div className="flex justify-start">
+        <Dropdown isButton values={['Jeux', 'High-tech']} onSelect={handleCategory} >
+          <button className="bg-stone-300 mx-1 px-2 py-1">
+            Catégorie
+          </button>
+        </Dropdown>        
+        <Dropdown isButton values={['croissant', 'decroissant']} onSelect={handleDropdown} >
+          <button className="bg-stone-300 mx-1 px-2 py-1">
+            Trier par prix
+          </button>
+        </Dropdown>
+      </div>
+      <div className="flex flex-wrap justify-evenly gap-4 f-full pt-2">
+        {data.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
+};
