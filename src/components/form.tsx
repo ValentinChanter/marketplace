@@ -8,38 +8,16 @@ export default function Form({
   onSubmit: (e: FormEvent<HTMLFormElement>) => void
 }) {
   return (
-    <form onSubmit={onSubmit}>
-      <label>
-        <span>Adresse mail</span>
-        <input type="text" name="username" required />
-        <span>Mot de passe</span>
-        <input type="password" name="password" required />
-      </label>
+    <form onSubmit={onSubmit} className="flex flex-col">
 
-      <button type="submit">Login</button>
+      <label className="font-semibold">Adresse mail</label>
+      <input type="text" name="username" required className='p-2 mt-1 mb-4 border-solid border rounded border-gray-600 focus:border-gray-700' />
+      <label className="font-semibold">Mot de passe</label>
+      <input type="password" name="password" required className='p-2 mt-1 mb-4 border-solid border rounded border-gray-600' />
 
-      {errorMessage && <p className="error">{errorMessage}</p>}
+      <button type="submit" className='text-white border-solid border-3 border-gray-800 rounded bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 py-2 my-1'>Connexion</button>
 
-      <style jsx>{`
-        form,
-        label {
-          display: flex;
-          flex-flow: column;
-        }
-        label > span {
-          font-weight: 600;
-        }
-        input {
-          padding: 8px;
-          margin: 0.3rem 0 1rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-        .error {
-          color: brown;
-          margin: 1rem 0 0;
-        }
-      `}</style>
+      {errorMessage && <p className="text-red-600 mt-4 mb-2">{errorMessage}</p>}
     </form>
   )
 }

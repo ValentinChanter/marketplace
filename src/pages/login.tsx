@@ -3,15 +3,17 @@ import useUser from "@/lib/useUser";
 import Layout from "@/components/layout";
 import Form from "@/components/form";
 import fetchJson, { FetchError } from "@/lib/fetchJson";
+import Router from "next/router";
 
 import { GetServerSideProps } from 'next'
 import { withIronSessionSsr } from "iron-session/next";
-import { sessionOptions, User } from '@/lib/session';
+import { sessionOptions } from '@/lib/session';
+import { User } from "@/pages/api/user"
 
 export default function Login({user}: {user:User}) {
   // here we just check if user is already logged in and redirect to profile
   const { mutateUser } = useUser({
-    redirectTo: "/logout",
+    redirectTo: "/commandes",
     redirectIfFound: true,
   });
 
@@ -19,7 +21,10 @@ export default function Login({user}: {user:User}) {
 
   return (
     <Layout pageName={"Connexion"} user={user}>
-      <div className="login">
+      <div className="w-3/4 border-solid border-2 rounded p-5">
+        
+        <p className="font-semibold text-lg">Déjà client ?</p>
+        <br />
         <Form
           errorMessage={errorMsg}
           onSubmit={async function handleSubmit(event) {
@@ -48,16 +53,12 @@ export default function Login({user}: {user:User}) {
             }
           }}
         />
+        
+        <br /><hr /><br />
+        <p className="font-semibold text-lg">Pas encore inscrit ?</p>
+        <br />
+        <button onClick={() => Router.push("/signup")} className='text-white border-solid border-3 border-gray-800 rounded bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 py-2 my-1 w-full'>S'inscrire</button>
       </div>
-      <style jsx>{`
-        .login {
-          max-width: 21rem;
-          margin: 0 auto;
-          padding: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-      `}</style>
     </Layout>
   );
 }
