@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useUser from "@/lib/useUser";
 import Layout from "@/components/layout";
-import Form from "@/components/form";
+import LoginForm from "@/components/loginForm";
 import fetchJson, { FetchError } from "@/lib/fetchJson";
 import Router from "next/router";
 
@@ -21,17 +21,17 @@ export default function Login({user}: {user:User}) {
 
   return (
     <Layout pageName={"Connexion"} user={user}>
-      <div className="w-3/4 border-solid border-2 rounded p-5">
+      <div className="w-1/3 border-solid border-2 rounded p-5 my-0">
         
         <p className="font-semibold text-lg">Déjà client ?</p>
         <br />
-        <Form
+        <LoginForm
           errorMessage={errorMsg}
           onSubmit={async function handleSubmit(event) {
             event.preventDefault();
 
             const body = {
-              username: event.currentTarget.username.value,
+              email: event.currentTarget.email.value,
               password: event.currentTarget.password.value,
             };
 
@@ -57,7 +57,7 @@ export default function Login({user}: {user:User}) {
         <br /><hr /><br />
         <p className="font-semibold text-lg">Pas encore inscrit ?</p>
         <br />
-        <button onClick={() => Router.push("/signup")} className='text-white border-solid border-3 border-gray-800 rounded bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 py-2 my-1 w-full'>S'inscrire</button>
+        <button onClick={() => Router.push("/signup")} className='text-white border-solid border-3 border-gray-800 rounded bg-teal-500 hover:bg-teal-600 focus:ring-2 focus:ring-blue-300 py-2 my-1 w-full'>S'inscrire</button>
       </div>
     </Layout>
   );
