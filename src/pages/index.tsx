@@ -5,7 +5,8 @@ import styles from '@/styles/Home.module.css'
 
 import { GetServerSideProps } from 'next'
 import { withIronSessionSsr } from "iron-session/next";
-import { sessionOptions, User } from '@/lib/session';
+import { sessionOptions } from '@/lib/session';
+import { User } from "@/pages/api/user"
 
 const inter = Inter({ subsets: ['latin'] })
 

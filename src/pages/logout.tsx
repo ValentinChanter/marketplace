@@ -5,7 +5,8 @@ import fetchJson, { FetchError } from "@/lib/fetchJson";
 
 import { GetServerSideProps } from 'next'
 import { withIronSessionSsr } from "iron-session/next";
-import { sessionOptions, User } from '@/lib/session';
+import { sessionOptions } from '@/lib/session';
+import { User } from "./api/user";
 
 export default function Logout(user:User) {
   const [errorMsg, setErrorMsg] = useState("");
