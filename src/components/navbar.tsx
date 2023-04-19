@@ -1,11 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './navbar.module.css'
-import { User } from '@/lib/session';
-import fetchJson, { FetchError } from "@/lib/fetchJson";
+import { User } from "@/pages/api/user"
+import fetchJson from "@/lib/fetchJson";
+import useUser from "@/lib/useUser";
+import Router from "next/router";
 
 export default function Navbar({pageName, user}: {pageName:string, user:User}) {
-    console.log(user)
+    const { mutateUser } = useUser({
+        redirectTo: "/",
+        redirectIfFound: false,
+    });
+
     return (
         <>
             <div className={styles.container}>
@@ -53,7 +59,7 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                                         </Link>
                                     </li>
                                     <li>
-                                        <p onClick={() => logout()} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out cursor-pointer">
+                                        <p onClick={() => { logout(mutateUser); Router.push("/"); }} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out cursor-pointer">
                                             Se déconnecter
                                         </p>
                                     </li>
@@ -76,18 +82,12 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
     )
 }
 
-async function logout() {
-    // TODO: Rediriger quand l'utilisateur est déconnecté
-    try {
+async function logout(mutateUser:Function) {
+    mutateUser(
         await fetchJson("/api/logout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        })
-    } catch (error) {
-      if (error instanceof FetchError) {
-        console.error(error.data.message);
-      } else {
-        console.error("An unexpected error happened:", error);
-      }
-    }
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+        }),
+        false,
+    );
 }
