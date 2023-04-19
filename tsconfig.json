@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/useUser.js", "src/lib/useEvents.js", "src/lib/session.ts", "src/lib/fetchJson.js", "src/pages/api/login.js", "src/pages/api/logout.js", "src/pages/api/user.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/useUser.ts", "src/lib/useEvents.js", "src/lib/session.ts", "src/lib/fetchJson.ts", "src/pages/api/login.ts", "src/pages/api/logout.ts", "src/pages/api/user.ts"],
   "exclude": ["node_modules"]
 }
