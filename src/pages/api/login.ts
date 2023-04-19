@@ -5,12 +5,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "./user";
 
 export default withIronSessionApiRoute(async (req: NextApiRequest, res: NextApiResponse) => {
-  const { username, password } = await req.body;
+  const { email, password } = await req.body;
 
   try {
     const userInfos = await prisma.user.findMany({
       where: {
-        email: username,
+        email,
         password
       },
     });
