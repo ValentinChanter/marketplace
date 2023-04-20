@@ -5,12 +5,13 @@ import { User } from "@/pages/api/user"
 import fetchJson from "@/lib/fetchJson";
 import useUser from "@/lib/useUser";
 import Router from "next/router";
+import redirection from '@/lib/redirection';
 
 export default function Navbar({pageName, user}: {pageName:string, user:User}) {
     const { mutateUser } = useUser({
-        redirectTo: "/",
         redirectIfFound: false,
     });
+    const redirect = redirection(user);
 
     return (
         <>
@@ -37,29 +38,31 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                 </form>
 
                 <div className={styles.rightLogosContainer}>
-                    {user !== null ? (
+                    {user && user !== null ? (
                         <div className='relative group'>
                             <div className={styles.userLogo}>
-                                <Link href="/commandes">
+                                <Link href={redirect.path}>
                                     <Image src="/user.png" fill sizes='100vw' alt="Profil"/>
                                 </Link>
                                 <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-white rounded-b-md shadow-lg top-12 right-0">
                                     <li>
-                                        <Link href="/commandes">
+                                        <Link href={redirect.path}>
                                             <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
-                                                Mes commandes
+                                                {redirect.desc}
                                             </p>
                                         </Link>
                                     </li>
+                                    {user.status === "CLIENT" ? (
+                                        <li>
+                                            <Link href="/subscription">
+                                                <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
+                                                    {user.isSubscribed ? "Mon abonnement" : "S'abonner"}
+                                                </p>
+                                            </Link>
+                                        </li>
+                                    ) : (<></>)}
                                     <li>
-                                        <Link href="/abonnement">
-                                            <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
-                                                Abonnement
-                                            </p>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <p onClick={() => { logout(mutateUser); Router.push("/"); }} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out cursor-pointer">
+                                        <p onClick={() => { logout(mutateUser); Router.replace("/").then(() => Router.reload()); }} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out cursor-pointer">
                                             Se déconnecter
                                         </p>
                                     </li>
