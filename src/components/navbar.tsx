@@ -14,7 +14,7 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
 
     return (
         <>
-            <div className={styles.container}>
+            <div className={`${styles.container} bg-mkGreen`}>
                 <div className={styles.leftLogosContainer}>
                     <div className={styles.menuLogo}>
                         <Image src="/menu.png" fill sizes='100vw' alt="Menu latéral" />

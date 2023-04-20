@@ -57,7 +57,7 @@ export default function Login({user}: {user:User}) {
         <br /><hr /><br />
         <p className="font-semibold text-lg">Pas encore inscrit ?</p>
         <br />
-        <button onClick={() => Router.push("/signup")} className='text-white border-solid border-3 border-gray-800 rounded bg-teal-500 hover:bg-teal-600 focus:ring-2 focus:ring-blue-300 py-2 my-1 w-full'>S'inscrire</button>
+        <button onClick={() => Router.push("/signup")} className='text-white border-solid border-3 border-gray-800 rounded bg-mkOrange hover:bg-[#e7a08c] focus:ring-2 focus:ring-orange-300 py-2 my-1 w-full'>S'inscrire</button>
       </div>
     </Layout>
   );
