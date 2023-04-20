@@ -11,9 +11,8 @@ import { sessionOptions } from '@/lib/session';
 import { User } from "@/pages/api/user"
 
 export default function Login({user}: {user:User}) {
-  // here we just check if user is already logged in and redirect to profile
+  // On détermine où rediriger l'utilisateur lorsqu'il est connecté, selon son statut
   const { mutateUser } = useUser({
-    redirectTo: "/commandes",
     redirectIfFound: true,
   });
 
@@ -29,6 +28,8 @@ export default function Login({user}: {user:User}) {
           errorMessage={errorMsg}
           onSubmit={async function handleSubmit(event) {
             event.preventDefault();
+
+            setErrorMsg("");
 
             const body = {
               email: event.currentTarget.email.value,
