@@ -16,7 +16,7 @@ export default function Login({user}: {user:User}) {
     return (
         <>
             <Layout pageName={"Inscription"} user={user}>
-                <div className="w-1/2 border-solid border-2 rounded p-5 my-auto">
+                <div className="w-1/2 border-solid border-2 rounded p-5 mt-0">
                     <p className="font-semibold text-lg mb-8">Pas encore inscrit ?</p>
                     <SignupForm 
                         errorMessage={errorMsg}
