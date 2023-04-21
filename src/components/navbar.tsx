@@ -6,14 +6,13 @@ import fetchJson from "@/lib/fetchJson";
 import useUser from "@/lib/useUser";
 import Router from "next/router";
 import redirection from '@/lib/redirection';
-import {useRouter} from 'next/router';
 
 export default function Navbar({pageName, user}: {pageName:string, user:User}) {
     const { mutateUser } = useUser({
         redirectIfFound: false,
     });
     const redirect = redirection(user);
-    const router = useRouter();
+
 
     return (
         <>
