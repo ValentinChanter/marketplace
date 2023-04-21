@@ -6,12 +6,14 @@ import fetchJson from "@/lib/fetchJson";
 import useUser from "@/lib/useUser";
 import Router from "next/router";
 import redirection from '@/lib/redirection';
+import {useRouter} from 'next/router';
 
 export default function Navbar({pageName, user}: {pageName:string, user:User}) {
     const { mutateUser } = useUser({
         redirectIfFound: false,
     });
     const redirect = redirection(user);
+    const router = useRouter();
 
     return (
         <>
@@ -44,10 +46,10 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                                 <Link href={redirect.path}>
                                     <Image src="/user.png" fill sizes='100vw' alt="Profil"/>
                                 </Link>
-                                <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-white rounded-b-md shadow-lg top-12 right-0">
+                                <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-mkGreen rounded-b-md shadow-lg top-12 right-0">
                                     <li>
                                         <Link href={redirect.path}>
-                                            <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
+                                            <p className="block px-4 py-2 text-sm text-mkDarkBlue hover:bg-[#96c9b9] hover:text-gray-900 duration-150">
                                                 {redirect.desc}
                                             </p>
                                         </Link>
@@ -55,14 +57,17 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                                     {user.status === "CLIENT" ? (
                                         <li>
                                             <Link href="/subscription">
-                                                <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
+                                                <p className="block px-4 py-2 text-sm text-mkDarkBlue hover:bg-[#96c9b9] hover:text-gray-900 duration-150">
                                                     {user.isSubscribed ? "Mon abonnement" : "S'abonner"}
                                                 </p>
                                             </Link>
                                         </li>
                                     ) : (<></>)}
                                     <li>
-                                        <p onClick={() => { logout(mutateUser); Router.replace("/").then(() => Router.reload()); }} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out cursor-pointer">
+                                        <p onClick={() => {
+                                            logout(mutateUser); // On déconnecte l'utilisateur et on supprime les informations de la session
+                                            Router.replace("/").then(() => Router.reload()); // On fait un full reload pour éviter que le dropdown s'affiche alors qu'il ne devrait pas
+                                        }} className="block px-4 py-2 text-sm text-mkDarkBlue hover:bg-[#96c9b9] hover:text-gray-900 duration-150 cursor-pointer">
                                             Se déconnecter
                                         </p>
                                     </li>
