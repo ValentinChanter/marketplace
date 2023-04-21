@@ -5,8 +5,10 @@ import { useEffect } from "react";
 
 // Vérifie que user a le bon statut, renvoie true si c'est bon, redirige vers / et renvoie false sinon
 export default function checkUserStatus(user: User, status: Status) {
-    useEffect(() => {
-        if (!user || user.status !== status) Router.push("/");
-    }, [user]);
-
+    if (!user || user.status !== status) {
+        useEffect(() => {
+            Router.push("/");
+        });
+        return false;
+    } else return true;
 }

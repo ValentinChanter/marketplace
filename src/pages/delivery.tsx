@@ -7,25 +7,32 @@ import Layout from "@/components/layout";
 import fetchJson from "@/lib/fetchJson";
 
 export default function Delivery({user}: {user:User}) {
-    checkUserStatus(user, "DELIVERY");
-
-	const body = {
-		id: user.id,
-	};
-
-	fetchJson("/api/delivery", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(body),
-	}).then(res => console.log(res))
-
-    return(
-        <>
-            <Layout pageName={"Mes livraisons"} user={user}>
-				test
-            </Layout>
-        </>
-    )
+    if(checkUserStatus(user, "DELIVERY")) {
+		const body = {
+			id: user.id,
+		};
+	
+		fetchJson("/api/delivery", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(body),
+		}).then(res => console.log(res))
+	
+		return(
+			<>
+				<Layout pageName={"Mes livraisons"} user={user}>
+					test
+				</Layout>
+			</>
+		)
+	} else {
+		return(
+			<>
+				<Layout pageName={"Non autorisé"} user={user}>
+				</Layout>
+			</>
+		)
+	}
 }
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(

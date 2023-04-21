@@ -62,6 +62,6 @@ export default async function delivery(req: NextApiRequest, res: NextApiResponse
             
         })
         
-        // res.status(200).json({packages: infos}) TODO
+        res.status(200).json({packages: []}) // TODO
     }
 }
