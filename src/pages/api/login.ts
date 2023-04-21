@@ -3,7 +3,7 @@ import { sessionOptions } from "@/lib/session";
 import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "./user";
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 export default withIronSessionApiRoute(async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = await req.body;

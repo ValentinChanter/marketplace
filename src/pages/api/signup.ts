@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 async function signup(req: NextApiRequest, res: NextApiResponse) {
     const { firstName, lastName, email, password } = await req.body;
