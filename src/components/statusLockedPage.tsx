@@ -18,6 +18,7 @@ export default function StatusLockedPage({children, user, status, f}: {children:
         useEffect(() => {
             Router.push("/");
         })
+        
         return(
             <>
                 <Layout pageName={"Non autorisé"} user={user}>
@@ -25,5 +26,4 @@ export default function StatusLockedPage({children, user, status, f}: {children:
             </>
         )
     }
-    
 }
