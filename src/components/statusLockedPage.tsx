@@ -16,7 +16,7 @@ export default function StatusLockedPage({children, user, status, f}: {children:
         );
     } else {
         useEffect(() => {
-            Router.push("/");
+            Router.push("/login");
         })
         
         return(
