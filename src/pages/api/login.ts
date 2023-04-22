@@ -19,10 +19,10 @@ export default withIronSessionApiRoute(async (req: NextApiRequest, res: NextApiR
 
     if (!userInfos || !isPasswordValid) res.status(401).json({ message: "Adresse mail ou mot de passe invalide(s). Veuillez réessayer."});
     else {
-      const user = { id: userInfos.id, status: userInfos.status, isSubscribed: userInfos.subscribed, isLoggedIn: true } as User;
+      const user = { id: userInfos.id, name: userInfos.firstName, status: userInfos.status, isSubscribed: userInfos.subscribed, isLoggedIn: true } as User;
       req.session.user = user;
       await req.session.save();
-      res.json(user);
+      res.status(200).json(user);
     }
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
