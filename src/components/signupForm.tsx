@@ -31,7 +31,7 @@ export default function SignupForm({
                 </div>
             </div>
 
-            <button type="submit" className='text-white border-solid border-3 border-gray-800 rounded bg-mkOrange hover:bg-[#e7a08c] focus:ring-2 focus:ring-orange-300 py-2 my-1 w-full'>S'inscrire</button>
+            <button type="submit" className="text-mkDarkBlue w-full rounded-md bg-mkOrange p-2 text mr-5 hover:bg-[#e7a08c] shadow active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all">S'inscrire</button>
 
             {errorMessage && <p className="text-red-600 mt-4 mb-2">{errorMessage}</p>}
             {successMessage && <p className="text-green-600 mt-4 mb-2">{successMessage}</p>}
