@@ -2,12 +2,9 @@ import {FC} from 'react'
 import Link from 'next/link';
 import { useStateContext } from '../../context/StateContext';
 
-export const ProductCard: FC<{product:any}> = ({product}) => {
-    const {addToCart} = useStateContext();
-
+export const ProductCat: FC<{product:any}> = ({product}) => {
     const name = product.product.name;
     const price = product.price;
-    const sellerName = product.seller.name;
     const thumbnail = product.product.thumbnail;
     
     return (
@@ -26,9 +23,6 @@ export const ProductCard: FC<{product:any}> = ({product}) => {
                 <div>
                      {price} € 
                 </div>
-                <div> {sellerName} </div>
-
-                <button onClick={() => addToCart(product, 1)}> Add to cart</button>
             </div>
         </div>
     )

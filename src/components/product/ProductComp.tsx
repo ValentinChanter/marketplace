@@ -6,11 +6,13 @@ export const ProductItem: FC<{product:any}> = ({product}) =>{
     const {qty, incQty, decQty, addToCart} = useStateContext();
 
     const name = product.product.name;
-    const desc = product.product.desc; 
     const price = product.price;
+    const sellerfirstName = product.seller.firstName;
+    const sellerName = product.seller.lastName;
     const thumbnail = product.product.thumbnail;
-    const sellerName = product.seller.name;
     const stock = product.quantity;
+    const delivery = product.seller.estDeliveryTime
+
 
 
     return(
@@ -18,7 +20,6 @@ export const ProductItem: FC<{product:any}> = ({product}) =>{
             <img src={thumbnail} alt={name}/>
             <div > {name}</div>
             <div>{price}€</div>
-            <div> {sellerName} </div>
             <div>{desc}</div>
             <div>
                 <p>Quantité :</p>
@@ -28,6 +29,8 @@ export const ProductItem: FC<{product:any}> = ({product}) =>{
             </div>
             <button onClick={() => addToCart(product,qty)}> Add to cart</button>
 
+            <div> {sellerfirstName} {sellerName} </div>
+            <div> livraison estimée : {delivery} jours</div>
         </div>
 
     )
