@@ -22,18 +22,12 @@ model User {
   lastName        String
   email           String            @unique
   password        String
-
-  // Pour CLIENT
   subscribed      Boolean           @default(false)
   status          Status            @default(CLIENT)
+  estDeliveryTime Int?
   orders          Order[]
-
-  // Pour SELLER
-  estDeliveryTime Int?              
-  products        ProductBySeller[]
-
-  // Pour DELIVERY
   packages        Package[]
+  products        ProductBySeller[]
 }
 
 model ProductBySeller {
@@ -64,6 +58,7 @@ model Package {
   deliveryDate  DateTime
   orderId       Int
   deliveryManId String
+  delivered     Boolean  @default(false)
   deliveryMan   User     @relation(fields: [deliveryManId], references: [id])
   order         Order    @relation(fields: [orderId], references: [id])
 }
