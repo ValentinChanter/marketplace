@@ -17,14 +17,14 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
     return (
         <>
             <div className={`${styles.container} bg-mkGreen`}>
-                <div className={styles.leftLogosContainer}>
-                    <div className={styles.menuLogo}>
-                        <Image src="/menu.png" fill sizes='100vw' alt="Menu latéral" />
+                <div className="flex flex-row mx-auto ml-[24px]">
+                    <div className="my-auto mr-[24px]">
+                        <Image src="/menu.png" width={40} height={40} alt="Menu latéral" />
                     </div>
 
-                    <div className={styles.logo}>
+                    <div className="my-auto mr-[24px]">
                         <Link href="/">
-                            <Image src="/next.svg" fill sizes='100vw' alt="Logo" />
+                            <Image src="/next.svg" width={200} height={50} alt="Logo" />
                         </Link>
                     </div>
                 </div>
@@ -38,14 +38,14 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                     </button>
                 </form>
 
-                <div className={styles.rightLogosContainer}>
+                <div className="flex flex-row mr-[24px]">
                     {user && user !== null ? (
                         <div className='relative group'>
-                            <div className={styles.userLogo}>
+                            <div>
                                 <Link href={redirect.path}>
-                                    <Image src="/user.png" fill sizes='100vw' alt="Profil"/>
+                                    <Image src="/user.png" width={40} height={40} alt="Profil" className='mt-[12px] mr-[24px]'/>
                                 </Link>
-                                <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-mkGreen rounded-b-md shadow-lg top-12 right-0">
+                                <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-mkGreen rounded-b-md shadow-lg top-15 right-0">
                                     <li>
                                         <Link href={redirect.path}>
                                             <p className="block px-4 py-2 text-sm text-mkDarkBlue hover:bg-[#96c9b9] hover:text-gray-900 duration-150">
@@ -74,14 +74,14 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                             </div>
                         </div>
                     ) : (
-                        <div className={styles.squareLogo}>
+                        <div>
                             <Link href="/login">
-                                <Image src="/user.png" fill sizes='100vw' alt="Profil"/>
+                                <Image src="/user.png" width={40} height={40} alt="Profil" className='mt-[12px] mr-[24px]' />
                             </Link>
                         </div>
                     )}
-                    <div className={styles.squareLogo}>
-                        <Image src="/cart.png" fill sizes='100vw' alt="Panier" />
+                    <div>
+                        <Image src="/cart.png" width={40} height={40} alt="Panier" className='mt-[12px] mr-[24px]' />
                     </div>
                 </div>
             </div>
