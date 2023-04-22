@@ -1,0 +1,107 @@
+div.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 64px;
+    width: 100%;
+    background-color: white;
+    box-shadow:
+    0 0 1px 1px rgb(29 17 51 / 4%),
+    0 0 3px 2px rgb(9 32 77 / 12%),
+    0 0 2px -3px rgb(29 17 51 / 12%);
+}
+
+div.leftLogosContainer {
+    display: flex;
+    flex-direction: row;
+    margin: auto 0 auto 24px;
+}
+
+div.logo {
+    margin: auto 24px auto 0;
+    width: 200px;
+    height: 50px;
+    position: relative;
+}
+
+div.menuLogo {
+    margin: auto 24px auto 0;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+div.rightLogosContainer {
+    display: flex;
+    flex-direction: row;
+    margin: auto 24px auto 0;
+}
+
+div.squareLogo {
+    margin: auto 0 auto 24px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+div.searchBar {
+    width: 70%;
+}
+
+div.searchForm {
+    display: flex;
+    width: 65%;
+    height: 100%;
+}
+
+input.search {
+    display: block;
+    margin: auto;
+    margin-right: 0;
+    background: #f2f2f2;
+    width: 80%;
+    height: 45px;
+    position: relative;
+    color: black;
+    box-shadow: 0 0 3px #868686;
+    border: 0;
+    padding-left: 2%;
+    border-radius: 3px;
+}
+
+input.search:focus {
+    box-shadow: 0 0 3px #474747;
+    outline: none;
+    background: #f8f8f8;
+    border-radius: 3px;
+}
+
+button.searchButton {
+    margin: auto;
+    margin-left: 0;
+    height: 47px;
+    width: 47px;
+    background-color: #616161;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 0 3px #868686;
+}
+
+button.searchButton:hover {
+    background-color: #6e6e6e;
+    box-shadow: 0 0 3px #474747;
+    cursor: pointer;
+}
+
+button.searchButton:active {
+    background-color: #666666;
+    box-shadow: 0 0 3px #474747;
+    cursor: pointer;
+}
+
+div.searchButtonDiv {
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}

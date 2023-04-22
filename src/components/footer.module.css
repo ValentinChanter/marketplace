@@ -1,0 +1,31 @@
+div.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 128px;
+    width: 100%;
+    background-color: white;
+    box-shadow:
+    0 0 1px 1px rgb(29 17 51 / 4%),
+    0 0 3px 2px rgb(9 32 77 / 12%),
+    0 0 2px -3px rgb(29 17 51 / 12%);
+}
+
+div.verticalContainer {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+a.link {
+    margin: 0.1rem 0 0.1rem 0;
+    font-family: "Arial";
+    font-size: 0.9rem;
+    color: black;
+}
+
+p.footerText {
+    font-family: "Arial";
+    font-size: 1.2rem;
+    color: black;
+}
