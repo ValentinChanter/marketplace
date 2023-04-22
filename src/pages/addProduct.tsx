@@ -1,3 +1,9 @@
+import { User } from "./api/user";
+import { GetServerSideProps } from "next";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "@/lib/session";
+
+import StatusLockedPage from "@/components/statusLockedPage";
 import Head from "next/head";
 import Layout from "../components/layout";
 import axios from "axios";
@@ -16,7 +22,7 @@ const fetcher = async (url: string) => {
 //     fetcher
 //   );
 //   if (error) return <div>Failed to load data</div>;
-export default function AddProduct() {
+export default function AddProduct({ user }: { user: User }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -47,66 +53,84 @@ export default function AddProduct() {
   };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Ajout de produit</title>
-      </Head>
-      <main>
-        <Layout pageName={"Ajouter produit"}>
-          <form onSubmit={handleSubmit} className={styles.addForm}>
-            <label htmlFor="name">Nom du Produit*</label>
-            <br />
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="input"
-              required
-            />
-            <br />
-            <br />
-            <label htmlFor="image">Photo du produit</label>
-            <br />
-            <input type="file" id="image" name="image" />
-            <br />
-            <br />
-            <label htmlFor="desc">Description du produit*</label>
-            <br />
-            <input type="text" id="desc" name="desc" required />
-            <br />
-            <br />
-            <label htmlFor="category">Categorie du produit*</label>
-            <br />
-            <input type="text" id="category" name="category" required />
-            <br />
-            <br />
-            <label htmlFor="quantity">Quantité mise en vente*</label>
-            <br />
-            <input
-              type="text"
-              id="quantity"
-              name="quantity"
-              pattern="{1,1000000}"
-              required
-            />
-            <br />
-            <br />
-            <label htmlFor="price">Prix unitaire*</label>
-            <br />
-            <input
-              type="text"
-              id="price"
-              name="price"
-              pattern="{1,1000000}"
-              required
-            />
-            €
-            <br />
-            <br />
-            <button type="submit">Submit</button>
-          </form>
-        </Layout>
-      </main>
-    </div>
+    <StatusLockedPage
+      user={user}
+      status="SELLER/DELIVERY/MARKETPLACE/CLIENT (choisissez un)"
+    >
+      <div className={styles.container}>
+        <Head>
+          <title>Ajout de produit</title>
+        </Head>
+        <main>
+          <Layout pageName={"Ajouter produit"}>
+            <form onSubmit={handleSubmit} className={styles.addForm}>
+              <label htmlFor="name">Nom du Produit*</label>
+              <br />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="input"
+                required
+              />
+              <br />
+              <br />
+              <label htmlFor="image">Photo du produit</label>
+              <br />
+              <input type="file" id="image" name="image" />
+              <br />
+              <br />
+              <label htmlFor="desc">Description du produit*</label>
+              <br />
+              <input type="text" id="desc" name="desc" required />
+              <br />
+              <br />
+              <label htmlFor="category">Categorie du produit*</label>
+              <br />
+              <input type="text" id="category" name="category" required />
+              <br />
+              <br />
+              <label htmlFor="quantity">Quantité mise en vente*</label>
+              <br />
+              <input
+                type="text"
+                id="quantity"
+                name="quantity"
+                pattern="{1,1000000}"
+                required
+              />
+              <br />
+              <br />
+              <label htmlFor="price">Prix unitaire*</label>
+              <br />
+              <input
+                type="text"
+                id="price"
+                name="price"
+                pattern="{1,1000000}"
+                required
+              />
+              €
+              <br />
+              <br />
+              <button type="submit">Submit</button>
+            </form>
+          </Layout>
+        </main>
+      </div>
+    </StatusLockedPage>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = req.session.user;
+
+    return {
+      props: {
+        user: user || null,
+      },
+    };
+  },
+  sessionOptions
+);
