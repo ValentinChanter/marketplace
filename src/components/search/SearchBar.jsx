@@ -25,7 +25,7 @@ export const Highlight = ({attribute, hit}) => {
 
 export const Hits = ({items,HitComponent}) => {
     return (
-        <div className='w-96 h-52 absolute bg-red-500 mt-14 ml-7 z-10'>
+        <div>
                 {items.map((item,i) => {
                     return (
                         <HitComponent key={i} hit={item}/>

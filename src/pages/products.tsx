@@ -5,9 +5,7 @@ import { Sorter } from '../components/Sorter'
 import React, { useState, useEffect } from 'react';
 // import { prisma } from '@/db'
 
-const fetcher = url => axios.get(url).then(res => res.data);
-
-
+const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
 function Home() {
     const { data, error } = useSWR('/api/data', fetcher);
