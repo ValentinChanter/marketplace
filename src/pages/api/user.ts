@@ -5,6 +5,7 @@ import { Status } from "@prisma/client";
 
 export type User = {
   id: string;
+  name: string;
   status: Status | null;
   isSubscribed: boolean;
   isLoggedIn: boolean;
@@ -23,6 +24,7 @@ async function userRoute(req: NextApiRequest, res: NextApiResponse<User>) {
   } else {
     res.json({
       id: "",
+      name: "",
       status: null,
       isSubscribed: false,
       isLoggedIn: false
