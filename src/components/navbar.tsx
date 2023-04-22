@@ -20,15 +20,6 @@ export default function Navbar({pageName}: {pageName: String}) {
                 </div>
             </div>
 
-            {/* <form action="/api/searchForm" method="post" >
-                <input type="search" placeholder="Rechercher un produit" className={styles.search}/>
-                <button type="submit" className={styles.searchButton}>
-                    <div className={styles.searchButtonDiv}>
-                        <Image src="/searchWhite.png" fill sizes='100vw' alt="Rechercher" />
-                    </div>
-                </button>
-            </form> */}
-
             <SearchBar />
 
             <div className={styles.rightLogosContainer}>

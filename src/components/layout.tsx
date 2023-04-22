@@ -12,10 +12,12 @@ export default function Layout({children, pageName}: {children: any, pageName: S
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar pageName={pageName}/>
-            <main className='bg-stone-100 px-28 py-20'>
-                {children}
-            </main>
-            <Footer />
+            <div className='flex flex-col h-screen'>
+                <main className='bg-stone-100 flex-grow'>
+                    {children}
+                </main>
+                <Footer />
+            </div>
         </>
     )
 }

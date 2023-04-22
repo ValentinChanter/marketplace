@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ProductCard } from './ProductCard';
-import { Dropdown } from './Dropdown';
+import { ProductCard } from '../product/ProductCard';
+import { Dropdown } from '../Dropdown';
 
 export const Sorter = ({ products }) => {
   const [sort, setSort] = useState('');
@@ -13,9 +13,9 @@ export const Sorter = ({ products }) => {
       filteredProducts = products.filter((product) => product.product.category === category);
     }
     if (sort === 'croissant') {
-      filteredProducts.sort((a, b) => a.product.price - b.product.price);
+      filteredProducts.sort((a, b) => a.price - b.price);
     } else if (sort === 'decroissant') {
-      filteredProducts.sort((a, b) => b.product.price - a.product.price);
+      filteredProducts.sort((a, b) => b.price - a.price);
     }
     setData([...filteredProducts]);
   }, [category, sort, products]);
