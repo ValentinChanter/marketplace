@@ -125,6 +125,11 @@ export default function Delivery({user}: {user:User}) {
 								</div>
 								<hr className="mt-5" />
 								<div className="m-1 flex flex-col p-2">
+									{/* Renvoie une icône de chargement si l'utilisateur a cliqué sur + ou - et doit attendre la réponse serveur,
+									 /* sinon les commandes à livrer (s'il y en a),
+									 /* sinon un message annonçant aucune commande à livrer
+									 /* Par défaut (avant que les infos soient récupérées, étant donné que la résolution du TSP est un peu longue), l'icône de chargement est affichée
+									 */}
 									{isLoading ? (
 										<div className="flex justify-center p-9 my-auto">
 											<Image src="/loading.gif" width={150} height={150} alt="Logo" className="mx-auto" priority />
@@ -146,7 +151,7 @@ export default function Delivery({user}: {user:User}) {
 																method: "POST",
 																headers: { "Content-Type": "application/json" },
 																body: JSON.stringify(body)
-															});
+															}) as any;
 	
 															if (res.isDelivered) {
 																setDeliveryStatus({
@@ -201,6 +206,7 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
     }, sessionOptions
 );
 
+// Renvoie une date en format JJ/MM/YYYY
 function formatDate(date?: Date) {
 	if (!date) date = new Date();
 	const day = date.getDate();

@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+// Met à jour la bdd pour confirmer la bonne livraison d'un package
 export default async function confirmDelivery(req: NextApiRequest, res: NextApiResponse) {
     const { id } = await req.body;
 

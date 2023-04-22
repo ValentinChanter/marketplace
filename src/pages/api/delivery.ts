@@ -10,6 +10,8 @@ const geocoder = NodeGeocoder(options);
 
 import { getDistance } from 'geolib';
 
+// Trouve tous les packages attribués à un livreur pour un jour donné et les renvoie après tri (avec 2-opt heuristique externe)
+// L'algorithme de Dijkstra avait inialement été utilisé mais abandonné pour son inefficacité pour résoudre notre problème en particulier (voir ci-dessous pour + d'explications)
 export default async function delivery(req: NextApiRequest, res: NextApiResponse) {
     const { id, date } = req.body;
 
@@ -97,6 +99,8 @@ export default async function delivery(req: NextApiRequest, res: NextApiResponse
         // L'algo est ici inutile car toutes les villes sont reliées entre elles donc le chemin le plus court depuis le dépôt sera toujours celui partant du dépôt (inégalité triangulaire)
         // De ce fait, si on cherche le chemin en utilisant l'algo de Dijkstra, on se retrouvera à simplement parcourir toutes les villes dans l'ordre croissant de leur distance au dépôt
         /*
+        const path = [];
+
         // Depuis le dépôt (initialisation)
         for (let i = 1; i < nodes.length; i++) {
             const dist = graph[0][i];
