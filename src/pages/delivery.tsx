@@ -13,9 +13,20 @@ const MapWithNoSSR = dynamic(() => import("@/components/map"), { ssr: false });
 
 export default function Delivery({user}: {user:User}) {
 	const [currDate, setCurrDate] = useState(new Date()) as [Date, Function];
-	const [packages, setPackages] = useState() as [any, Function];
+	const [packages, setPackages] = useState([]) as [Array<any>, Function];
 	const [deliveryStatus, setDeliveryStatus] = useState({}) as [any, Function];
-	const [isLoading, setIsLoading] = useState(false) as [boolean, Function];
+	const [isLoading, setIsLoading] = useState(true) as [boolean, Function];
+	const [addresses, setAddresses] = useState([]) as [Array<any>, Function];
+
+	useEffect(() => {
+		if (packages) {
+			const newAddresses = packages.map((pack:any) => ({
+				lat: pack.latitude,
+				lng: pack.longitude
+			}));
+			setAddresses(newAddresses);
+		}
+	}, [packages])
 
 	return (
 		<>
@@ -33,16 +44,8 @@ export default function Delivery({user}: {user:User}) {
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(body),
 					}).then((res: any) => {
-						const packages = res.packages;
-						packages.map((pack:any) => {
-							if (pack.isDelivered) {
-								setDeliveryStatus({
-									...deliveryStatus,
-									[pack.id]: "delivered"
-								});
-							}
-						})
 						setPackages(res.packages);
+						setIsLoading(false);
 					});
 				}, [])
 			}}>
@@ -53,7 +56,7 @@ export default function Delivery({user}: {user:User}) {
 						<div className="p-5 border rounded-md">
 							<div>
 								<div className="flex flex-row justify-center">
-									<button className={`text-mkDarkBlue rounded-full bg-mkOrange w-7 h-7 mr-5 shadow" ${isLoading || !checkMinusDate(currDate) ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e7a08c] active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all"}`} onClick={() => {
+									<button className={`text-mkDarkBlue rounded-full bg-mkOrange w-9 h-9 mr-5 shadow" ${isLoading || !checkMinusDate(currDate) ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e7a08c] active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all"}`} onClick={() => {
 										if (!isLoading && checkMinusDate(currDate)) {
 											const newDate = new Date(currDate);
 											newDate.setDate(newDate.getDate() - 1);
@@ -71,17 +74,7 @@ export default function Delivery({user}: {user:User}) {
 												headers: { "Content-Type": "application/json" },
 												body: JSON.stringify(body),
 											}).then((res: any) => {
-												const packages = res.packages;
-												packages.map((pack:any) => {
-													if (pack.isDelivered) {
-														setDeliveryStatus({
-															...deliveryStatus,
-															[pack.id]: "isDelivered"
-														});
-													}
-												})
-												
-												setPackages(res.packages);
+												setPackages(res.packages)
 												setIsLoading(false);
 											});
 										}
@@ -89,7 +82,7 @@ export default function Delivery({user}: {user:User}) {
 
 									<p className="text-2xl font-lg">Vos livraisons du {formatDate(currDate)}</p>
 									
-									<button className={`text-mkDarkBlue rounded-full bg-mkOrange w-7 h-7 ml-5 shadow" ${isLoading || !checkPlusDate(currDate) ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e7a08c] active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all"}`} onClick={() => {
+									<button className={`text-mkDarkBlue rounded-full bg-mkOrange w-9 h-9 ml-5 shadow" ${isLoading || !checkPlusDate(currDate) ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e7a08c] active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all"}`} onClick={() => {
 										if (!isLoading && checkPlusDate(currDate)) {
 											const newDate = new Date(currDate);
 											newDate.setDate(newDate.getDate() + 1);
@@ -107,17 +100,7 @@ export default function Delivery({user}: {user:User}) {
 												headers: { "Content-Type": "application/json" },
 												body: JSON.stringify(body),
 											}).then((res: any) => {
-												const packages = res.packages;
-												packages.map((pack:any) => {
-													if (pack.isDelivered) {
-														setDeliveryStatus({
-															...deliveryStatus,
-															[pack.id]: "isDelivered"
-														});
-													}
-												})
-
-												setPackages(res.packages);
+												setPackages(res.packages)
 												setIsLoading(false);
 											});
 										}
@@ -126,8 +109,8 @@ export default function Delivery({user}: {user:User}) {
 								<hr className="mt-5" />
 								<div className="m-1 flex flex-col p-2">
 									{/* Renvoie une icône de chargement si l'utilisateur a cliqué sur + ou - et doit attendre la réponse serveur,
-									 /* sinon les commandes à livrer (s'il y en a),
-									 /* sinon un message annonçant aucune commande à livrer
+									 /* sinon les colis à livrer (s'il y en a),
+									 /* sinon un message annonçant aucun colis à livrer
 									 /* Par défaut (avant que les infos soient récupérées, étant donné que la résolution du TSP est un peu longue), l'icône de chargement est affichée
 									 */}
 									{isLoading ? (
@@ -137,13 +120,14 @@ export default function Delivery({user}: {user:User}) {
 									) : packages ? (packages[0] ? packages.slice(1).map((pack:any) => {
 										return (
 											<div className="text-mkDarkBlue bg-mkGreen rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex flex-row p-5 my-3" key={pack.id}>
-												<p className="my-auto mx-7 text-xl font-semibold">Commande n°{pack.id}</p>
+												<p className="my-auto mx-7 text-xl font-semibold">Colis n°{pack.id}</p>
 												<div className="flex flex-col">
 													<p className="font-light text-lg">{pack.firstName + " " + pack.lastName}</p>
 													<p className="text-lg">Au {pack.address}</p>
 												</div>
 												<div className="ml-auto">
 													<button className={`rounded-full bg-mkOrange p-3 w-60 mr-5 shadow " ${deliveryStatus[pack.id] === "isDelivered" ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e7a08c] active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all"}`} onClick={async () => {
+														// Si le bouton n'est pas grisé
 														if (!deliveryStatus[pack.id]) {
 															const body = { id: pack.id };
 														
@@ -152,7 +136,8 @@ export default function Delivery({user}: {user:User}) {
 																headers: { "Content-Type": "application/json" },
 																body: JSON.stringify(body)
 															}) as any;
-	
+															
+															// On utilise le useState pour le marquer comme livré dynamiquement
 															if (res.isDelivered) {
 																setDeliveryStatus({
 																	...deliveryStatus,
@@ -165,7 +150,7 @@ export default function Delivery({user}: {user:User}) {
 											</div>
 										)
 									}) : (
-										<span className="mt-10 text-center text-xl">Aucune commande à livrer !</span>
+										<span className="mt-10 text-center text-xl">Aucun colis à livrer !</span>
 									)) : (
 										<div className="flex justify-center p-9 my-auto">
 											<Image src="/loading.gif" width={150} height={150} alt="Logo" className="mx-auto" priority />
@@ -174,17 +159,8 @@ export default function Delivery({user}: {user:User}) {
 								</div>
 							</div>
 
-							<div className={`w-full p-3.5 ${packages && !packages[0] ? "invisible" : ""}`}>
-								{packages && packages[0] ? (
-									<MapWithNoSSR addresses={packages.map((pack:any) => {
-										return {
-											lat: pack.latitude,
-											lng: pack.longitude
-										}
-									})} />
-								) : (
-									<></>
-								)}
+							<div className={`w-full p-3.5 ${addresses.length === 0 ? "invisible" : ""}`}>
+								{addresses.length > 0 && <MapWithNoSSR addresses={addresses} />}
 							</div>
 						</div>
 					</div>
