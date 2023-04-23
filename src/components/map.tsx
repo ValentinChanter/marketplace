@@ -52,8 +52,8 @@ const Map = ({addresses}: {addresses: any}) => {
     return (
         <MapContainer zoom={3} style={{ height: '80vh' }}>
             <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='Google Maps'
+                url='http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}' subdomains={['mt0','mt1','mt2','mt3']}
             />
 
             {addresses ? addresses.map((a:any) => {
