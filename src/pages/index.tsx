@@ -26,7 +26,7 @@ export default function Home({ user }: { user: User }) {
           <img
             src="/crying.svg"
             alt="cryinnnng"
-            className="absolute -z-20 object-fill"
+            className="absolute -z-20 object-fill w-full h-screen overflow-hidden"
           />
           {data ? (
             data
