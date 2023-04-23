@@ -8,7 +8,7 @@ import fetchJson from "@/lib/fetchJson";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
+// a
 const MapWithNoSSR = dynamic(() => import("@/components/map"), { ssr: false });
 
 export default function Delivery({user}: {user:User}) {

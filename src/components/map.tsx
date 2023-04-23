@@ -2,12 +2,10 @@ import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
 import L from "leaflet";
 import "leaflet-routing-machine";
 import { LatLngExpression } from 'leaflet';
 import { useEffect } from 'react';
-import 'leaflet-defaulticon-compatibility';
 
 export function ChangeView({ coords }: { coords: LatLngExpression }) {
     const map = useMap();
