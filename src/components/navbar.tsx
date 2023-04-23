@@ -24,7 +24,7 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
 
                     <div className="my-auto mr-[24px]">
                         <Link href="/">
-                            <Image src="/next.svg" width={200} height={50} alt="Logo" />
+                            <Image src="/logo.png" width={200} height={50} alt="Logo" />
                         </Link>
                     </div>
                 </div>
