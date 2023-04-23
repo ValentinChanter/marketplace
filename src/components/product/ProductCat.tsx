@@ -1,16 +1,16 @@
 import {FC} from 'react'
 import Link from 'next/link';
-import { useStateContext } from '../../context/StateContext';
 
 export const ProductCat: FC<{product:any}> = ({product}) => {
     const name = product.product.name;
     const price = product.price;
-    const thumbnail = product.product.thumbnail;
+    const thumbnail = product.product.imgUrl;
     
     return (
-        <div className="bg-white shadow-md rounded-lg max-w-md w-3/12 text-gray-800 mt-2 mb-2 flex flex-col bg-clip-border">
-            <img src={thumbnail} alt={name} className="w-auto max-h-48 object-cover rounded-lg" />
-            <div className="font-medium text-center">
+        <div className="bg-mkWhite shadow-md rounded-l-md w-full mt-2 mb-2 flex flex-col bg-clip-border p-4">
+            <img src={thumbnail} alt={name} className="w-auto max-h-48 object-cover rounded-l-md" />
+            <div className='flex justify-between'>
+            <div className=" font-semibold">
                 <Link href={{
                     pathname: 'product/[id]',
                     query:{
@@ -20,9 +20,10 @@ export const ProductCat: FC<{product:any}> = ({product}) => {
             
             </div>
             <div>
-                <div>
+                <div className='text-mkDarkOrange font-bold'>
                      {price} € 
                 </div>
+            </div>
             </div>
         </div>
     )

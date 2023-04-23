@@ -4,15 +4,18 @@ import useSWR from 'swr'
 import { Sorter } from '../components/sort/Sorter'
 import React, { useState, useEffect } from 'react';
 import { useRouter} from 'next/router';
-// import { prisma } from '@/db'
+import { GetServerSideProps } from 'next'
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from '@/lib/session';
+import { User } from "@/pages/api/user"
 
 const fetcher = (params) => axios.get('/api/search', {
      params,
   }).then(res => res.data);
 
-function Home() {
+  export default function Home({user}: {user:User}) {
     const router = useRouter()
-    const { query, category } = router.query;
+    const { search, category } = router.query;
     // const {data, error, isLoading } = useSWR( {
     //     q: query,
     //     s:'entapouet',
@@ -25,13 +28,24 @@ function Home() {
 
     return (
         <>
-            <Layout pageName={"Produit"}>               
+            <Layout pageName={"Produit"} user={user}>               
                 <div>
-                    <Sorter  />
+                    <Sorter category={category} search={search} />
                 </div>              
             </Layout>
         </>
     );
 }
 
-export default Home;
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
+    async function getServerSideProps({ req }) {
+      const user = req.session.user;
+  
+      return {
+        props: {
+          user: user || null,
+        },
+      };
+    }, sessionOptions
+  );
+  

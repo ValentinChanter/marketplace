@@ -2,7 +2,7 @@ import Layout from '../components/layout'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { Category } from '../components/sort/Category';
+import { Category } from '../components/Category';
 import axios from 'axios';
 import useSWR from 'swr';
 
@@ -22,11 +22,14 @@ export default function Home({user}: {user:User}) {
 
   return (
     <>
-      <Layout pageName={"Accueil"}user={user}>
+      <Layout pageName={"Accueil"} user={user}>
         {data && (
           <>
-            <Category products={data} category="High-tech" />
-            <Category products={data} category="Jeux" />
+            <div className='mx-28 my-10'>
+            <Category products={data} category="Garden" />
+            <div className='w-full my-7 mt-10 border-t-2 border-t-mkDarkGreen'></div>
+            <Category products={data} category="Games" />
+            </div>
           </>
         )}
       </Layout>

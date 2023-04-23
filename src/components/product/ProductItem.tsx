@@ -1,33 +1,54 @@
 import Link from "next/link";
 import React from "react";
 import {FC} from 'react'
+import Image from 'next/image'
+
+import { useStateContext } from "../../../context/StateContext";
 
 export const ProductItem: FC<{product:any}> = ({product}) =>{
+    const {qty, incQty, decQty, addToCart} = useStateContext();
     const name = product.product.name;
     const desc = product.product.desc; 
     const price = product.price;
     const sellerfirstName = product.seller.firstName;
     const sellerName = product.seller.lastName;
-    const thumbnail = product.product.thumbnail;
+    const thumbnail = product.product.imgUrl;
     const delivery = product.seller.estDeliveryTime
+    const stock = product.quantity;
 
-
+    console.log(thumbnail);
+    
 
     return(
-        <div>
-            <img src={thumbnail} alt={name}/>
-            <div > {name} </div>
-            <div>{price}€</div>
-            <div> {sellerfirstName} {sellerName} </div>
-            <div> livraison estimée : {delivery} jours</div>
-            <div>{desc}</div>
-            <Link href={{
+        <div className="flex justify-start gap-10 bg-mkWhite text-mkDarkBlue mx-40 my-20 p-10">
+            <div>
+                <Image src={thumbnail} alt={name} className="bg-mkOrange" width={400} height={400}/>
+            </div>
+            <div>
+            <div className="font-bold text-xl "> {name} </div>
+            <div className="italic"> {sellerfirstName} {sellerName} </div>
+            <div className="text-mkDarkOrange font-semibold text-lg my-3">{price}€</div>
+   
+            <div >{desc}</div>
+            <div className="mt-3"> livraison estimée : {delivery} jours</div>
+            
+            <div className="font-semibold italic"><Link href={{
                     pathname: '../compare/[id]',
                     query:{
                         id: product.productId
                     }
-                }}> Comparer plo plop </Link>
-            <button> Add to cart</button>
+                }}> Comparer</Link>
+            </div>
+            <div className="mt-5">
+                Quantité :
+                <div className="border-mkDarkGreen border w-fit ">
+                <button onClick={decQty} className="bg-mkDarkGreen  text-mkWhite px-2 hover:bg-mkGreen hover:text-mkDarkBlue ">-</button>
+                <span className="mx-2">{qty}</span>
+                <button onClick={() => incQty(stock)}  className="bg-mkDarkGreen text-mkWhite px-2 hover:bg-mkGreen hover:text-mkDarkBlue ">+</button>
+                </div>
+            </div>
+            <button onClick={() => addToCart(product,qty)} className=" mt-5 relative overflow-hidden bg-transparent text-center uppercase text-base transition-[0.3s] z-[1] text-mkDarkGreen px-[1.8em] py-[0.8em] border-2 border-solid border-mkDarkGreen before:content-[''] before:w-0 before:h-[300%] before:absolute before:-translate-x-2/4 before:-translate-y-2/4 before:rotate-45 before:transition-[0.5s] before:duration-[ease] before:block before:z-[-1] before:left-2/4 before:top-2/4 hover:before:w-[105%] hover:text-white before:bg-mkDarkGreen"> Add to cart</button>
+            </div>
         </div>
 
     )

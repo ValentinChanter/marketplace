@@ -6,13 +6,13 @@ export const Compare = ({ products }) => {
     const [sort, setSort] = useState('');
     const [delivery, setDelivery] = useState('');
     const [data, setData] = useState(products);
-  
+    
     useEffect(() => {
       let filteredProducts = products;
       // products type: array
       // map,sort,
       // delivry <---
-      if (delivery === 'Rapide'){
+      if (delivery === 'Rapide'){        
         filteredProducts.sort((a, b) => a.seller.estDeliveryTime - b.seller.estDeliveryTime);
       } else if (delivery === 'Lent'){
         filteredProducts.sort((a, b) => b.seller.estDeliveryTime - a.seller.estDeliveryTime);
@@ -37,17 +37,17 @@ export const Compare = ({ products }) => {
       <div>
         <div className="flex justify-start">
           <Dropdown isButton values={['Rapide', 'Lent']} onSelect={handleDelivery} >
-            <button className="bg-stone-300 mx-1 px-2 py-1">
+            <button className="bg-mkOrange mx-1 px-2 py-1">
               Temps de livraison
             </button>
           </Dropdown>        
           <Dropdown isButton values={['croissant', 'decroissant']} onSelect={handleDropdown} >
-            <button className="bg-stone-300 mx-1 px-2 py-1">
+            <button className="bg-mkOrange mx-1 px-2 py-1">
               Trier par prix
             </button>
           </Dropdown>
         </div>
-        <div className="flex flex-wrap justify-evenly gap-4 f-full pt-2">
+        <div className="grid grid-cols-5  justify-evenly gap-5  pt-2">
           {data.map((product) => (
             <ProductComp key={product.id} product={product} />
           ))}

@@ -14,7 +14,7 @@ export default withIronSessionApiRoute(async (req: NextApiRequest, res: NextApiR
         email
       },
     });
-
+    // 
     const isPasswordValid = userInfos ? await bcrypt.compare(password, userInfos.password) as boolean : false
 
     if (!userInfos || !isPasswordValid) res.status(401).json({ message: "Adresse mail ou mot de passe invalide(s). Veuillez réessayer."});

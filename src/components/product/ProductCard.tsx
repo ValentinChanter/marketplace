@@ -9,7 +9,7 @@ export const ProductCard: FC<{product:any}> = ({product}) => {
     // z.b -> error
     // z['b'] -> undefined
     // z?.b // b not exist so undefined, stop the exec
-    // z?.b?.a // if b not exist will stop search more and not evaluate "?.a"
+    // z?.b?.a // if b not exist will stop search more and not evaluate "?.a"    
     const name = product?.product?.name ?? product.name;
     const price = product.price;
     const sellerfirstName = product?.seller?.firstName ?? product.firstName;
@@ -17,7 +17,7 @@ export const ProductCard: FC<{product:any}> = ({product}) => {
     const thumbnail = product?.product?.imgUrl ?? product.imgUrl;
 
     return (
-        <div className="bg-white shadow-md rounded-lg max-w-md w-3/12 text-gray-800 mt-2 mb-2 flex flex-col bg-clip-border">
+        <div className="bg-white shadow-md rounded-lg text-gray-800 mt-2 mb-2 flex flex-col bg-clip-border">
             <img src={thumbnail} alt={name} className="w-auto max-h-48 object-cover rounded-lg" />
             <div className="font-medium text-center">
                 <Link href={{

@@ -9,6 +9,7 @@ export default async function handler(
   const s = req.query.s?.toString(); // seller, random word to active it 
   const c = req.query.c?.toString(); // category
   const p = req.query.p?.toString(); // page
+ 
 
   const page = typeof +(p as string) === "number" ? +(p as string) : 0;
 

@@ -40,9 +40,9 @@ export const Dropdown: FC<DropdownProps> = ({children, isMouse = false, isButton
                 {children}
             </div>
             {active ? (
-                <div className="mt-2 py-2 w-48 bg-white rounded-lg absolute z-10 border" >
+                <div className="mt-2 py-2 w-48 bg-white absolute z-10 border" >
                     {values.map((value,i) => (
-                        <div key={i} onClick={() => onSelectItem(value)} className="block px-4 py-2 text-gray-500 hover:text-blue-500">{value}</div>
+                        <div key={i} onClick={() => onSelectItem(value)} className="block px-4 py-2 text-gray-500 hover:text-mkDarkOrange">{value}</div>
                     ))}
                 </div>
             ): null}

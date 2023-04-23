@@ -20,7 +20,8 @@ export default async function handler(
     skip: 30*page,
     select: {
         category: true
-    }
+    },
+    distinct: ['category']
    })
 
   return res.status(200).json(categories)

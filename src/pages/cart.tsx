@@ -20,7 +20,7 @@ export default function Cart({user}: {user:User}) {
         <div className="flex justify-center">
           {cartItems.length === 0 && (
             <div>
-              <Image src="/../public/cart.png" alt="cart" width="150" height="150" />
+              {/* <Image src="/../public/cart.png" alt="cart" width="150" height="150" /> */}
               <h1> Votre panier est vide</h1>
 
               <Link href="/products">
