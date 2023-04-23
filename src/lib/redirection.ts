@@ -17,15 +17,13 @@ export default function redirection(user: User) {
 				break;
 
 			case "MARKETPLACE":
-				res.path = "/";
-				res.desc = "";
-				// TODO
+				res.path = "/addProduct";
+				res.desc = "Ajouter un produit";
 				break;
 
 			case "SELLER":
-				res.path = "/";
-				res.desc = "";
-				// TODO
+				res.path = "/addProduct";
+				res.desc = "Ajouter un produit";
 				break;
 		}
 
