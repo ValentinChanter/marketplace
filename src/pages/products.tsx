@@ -1,6 +1,5 @@
 import Layout from '../components/layout'
 import axios from 'axios'
-import useSWR from 'swr'
 import { Sorter } from '../components/sort/Sorter'
 import React, { useState, useEffect } from 'react';
 import { useRouter} from 'next/router';
@@ -16,15 +15,6 @@ const fetcher = (params) => axios.get('/api/search', {
   export default function Home({user}: {user:User}) {
     const router = useRouter()
     const { search, category } = router.query;
-    // const {data, error, isLoading } = useSWR( {
-    //     q: query,
-    //     s:'entapouet',
-    //     c: category
-    // }, fetcher);
-
-    // if (error) return <div>Failed to load data</div>;
-
-    // console.log(data);
 
     return (
         <>

@@ -1,9 +1,3 @@
-
-// Nobody comment:  ?????
-// you have axios in your project...
-// https://axios-http.com/fr/docs/intro
-// Axios doing the same with better perf as "fetch"
-// 
 export default async function fetchJson<JSON = unknown>(
     input: RequestInfo,
     init?: RequestInit,

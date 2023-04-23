@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ProductComp } from '../product/ProductComp';
 import { Dropdown } from '../Dropdown';
 
+// sorter which compare the delivery time or the price of products
 export const Compare = ({ products }) => {
     const [sort, setSort] = useState('');
     const [delivery, setDelivery] = useState('');
@@ -9,26 +10,23 @@ export const Compare = ({ products }) => {
     
     useEffect(() => {
       let filteredProducts = products;
-      // products type: array
-      // map,sort,
-      // delivry <---
       if (delivery === 'Rapide'){        
-        filteredProducts.sort((a, b) => a.seller.estDeliveryTime - b.seller.estDeliveryTime);
+        filteredProducts.sort((a:any, b:any) => a.seller.estDeliveryTime - b.seller.estDeliveryTime);
       } else if (delivery === 'Lent'){
-        filteredProducts.sort((a, b) => b.seller.estDeliveryTime - a.seller.estDeliveryTime);
+        filteredProducts.sort((a:any, b:any) => b.seller.estDeliveryTime - a.seller.estDeliveryTime);
       }
       if (sort === 'croissant') {
-        filteredProducts.sort((a, b) => a.price - b.price);
+        filteredProducts.sort((a:any, b:any) => a.price - b.price);
       } else if (sort === 'decroissant') {
-        filteredProducts.sort((a, b) => b.price - a.price);
+        filteredProducts.sort((a:any, b:any) => b.price - a.price);
       }
       setData([...filteredProducts]);
     }, [delivery, sort, products]);
   
-    const handleDropdown = (value) => {
+    const handleDropdown = (value:any) => {
       setSort(value);
     };
-    const handleDelivery = (value) => {
+    const handleDelivery = (value:any) => {
       setDelivery(value);
     };
   
@@ -48,7 +46,7 @@ export const Compare = ({ products }) => {
           </Dropdown>
         </div>
         <div className="grid grid-cols-5  justify-evenly gap-5  pt-2">
-          {data.map((product) => (
+          {data.map((product:any) => (
             <ProductComp key={product.id} product={product} />
           ))}
         </div>

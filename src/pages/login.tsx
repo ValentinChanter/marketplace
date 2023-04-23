@@ -21,7 +21,8 @@ export default function Login({user}: {user:User}) {
 
   return (
     <Layout pageName={"Connexion"} user={user}>
-      <div className="w-1/3 border-solid border-2 rounded p-5 my-0">
+      <div className="flex justify-center mt-10">
+      <div className="w-1/3 border-solid border-2 rounded p-5 my-0 bg-mkWhite">
         
         <p className="font-semibold text-lg">Déjà client ?</p>
         <br />
@@ -58,6 +59,7 @@ export default function Login({user}: {user:User}) {
         <p className="font-semibold text-lg">Pas encore inscrit ?</p>
         <br />
         <button onClick={() => Router.push("/signup")} className='text-white border-solid border-3 border-gray-800 rounded bg-mkOrange hover:bg-[#e7a08c] focus:ring-2 focus:ring-orange-300 py-2 my-1 w-full'>S'inscrire</button>
+      </div>
       </div>
     </Layout>
   );

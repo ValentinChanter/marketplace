@@ -4,38 +4,32 @@ import {
   useState,
   createContext,
   useContext,
-  createElement,
   FC,
 } from "react";
 import axios from "axios";
-import Image from "next/image";
 import {useOuterClick} from '../../lib/hooks'
 import { useRouter} from 'next/router';
 
 export const searchContext = createContext<{search:string, select: number}>({search: "", select:-1});
 
-
-/**
- * 
- * let key =  "name"
- * let sellerProduct =  {product: {name: ""}}
- *  
- * let value = sellerProduct[key] -> its undefined
- * can resolve:
- * let key = "product.name"
- * 
- * let value = pathObject(sellerProduct, key) // its workkk youhouuuuu
- */
 const pathObject = (obj:any, path:string):any => {
-  let parts = path.split(".")
-  if(parts.length === 1){
-    return obj[parts[0]]
+  let parts = path.split(".") // split path by "." example "product.name" -> ['product', 'name']
+  if(parts.length === 1){ // if one parts just return the object
+    return obj[parts[0]] // obj[key] -> obj['name']
   }
+  /**  When is more return a recursive 
+  * Example: 
+  * const test = pathObject({shop: {title:"nook"}}, "shop.title")
+  * 
+  * iteration: 
+  * pathObject -> ({title:'shop'}, 'title') -> 'title'
+  *  
+  */
   return pathObject(obj[parts[0]], parts.slice(1).join("."))
 }
 /**
  *
- * Componant qui met en valeur ta recherche actuel
+ * Componant qui met en valeur la recherche actuelle
  */
 export const Highlight: FC<{ attribute: string; hit: any }> = ({
   attribute,
@@ -47,22 +41,17 @@ export const Highlight: FC<{ attribute: string; hit: any }> = ({
   if (!search.trim()) {
     return <span>{text}</span>;
   }
-  // IPhone
-  //  Search > phone
-  //  /(phone)/
-  // ['i', 'phone', '20']
-  // phone === phone alors je met en bold sinon osef
   // crée regex avec le contenue de la search
   const regex = new RegExp(`(${search})`, "ig");
   // filtre le text par la regex afin de pouvoir la mettre en bold/italic
   const parts = text.split(regex).filter((part: string) => !!part);
   // Example
   // text = "Iphone"
-  // l'utilisateur écris "phone" dans la search bar
+  // l'utilisateur écrit "phone" dans la search bar
   // search = "phone"
   // La regex dans le code est donc
   // regex = /(phone)/
-  // quand nous fessont notre split par la regex généré par le search.
+  // split par la regex généré par le search.
   // parts = ['I', 'phone']
   // ensuite nous renvoyons les parts en testant si la part match avec la regex
   // si c'est le cas nous pouvons la renvoyé en bold/italic sinon elle ne match pas avec le search
@@ -78,12 +67,10 @@ export const Highlight: FC<{ attribute: string; hit: any }> = ({
     );
   });
 };
+
 /**
  * les Hits est un composant servant de conteneur pour les "HitComponent"
- *
  * Le "HitComponent": c'est un composant qui sert de carte dynamique pour la réponse API
- *
- *
  */
 export const Hits: FC<{
   items: Array<any>;
@@ -92,24 +79,24 @@ export const Hits: FC<{
   const {select} = useContext(searchContext);
 
   return items.length ? (
-    <div className="w-full absolute p-2 my-5 flex flex-col gap-2 bg-zinc-50 border-2 border-mkDarkGreen rounded-md">
+    <div className="w-full absolute p-2 my-5 flex flex-col gap-2 bg-mkWhite border-2 border-mkDarkGreen rounded-md z-50">
       {items.map((item, i) => {
         return <HitComponent key={i} hit={item} selected={i === select} />;
       })}
-      <div className="flex flex-row gap-2 text-xs pt-2 border-t text-gray-500 leading-4">
+      <div className="flex flex-row gap-2 text-xs pt-2 border-t text-gray-400 leading-4">
         {/* https://github.com/halfmage/majesticons */}
         Navigate
-        <span className="p-1 bg-gray-200 rounded">
+        <span className="p-1 bg-gray-300 rounded">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m12 5l6 6m-6-6l-6 6m6-6v14"></path></svg>       
         </span>
-        <span className="p-1 bg-gray-200 rounded">
+        <span className="p-1 bg-gray-300 rounded">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m12 19l6-6m-6 6l-6-6m6 6V5"></path></svg>
         </span>
         <div>
           |
         </div>
         Go to 
-        <span className="p-1 bg-gray-200 rounded">
+        <span className="p-1 bg-gray-300 rounded">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="m4.641 12.5l2.873 2.704a.75.75 0 0 1-1.028 1.092l-4.25-4a.75.75 0 0 1 0-1.092l4.25-4a.75.75 0 1 1 1.028 1.092L4.641 11H14.75a1.75 1.75 0 0 0 1.75-1.75v-4.5a.75.75 0 0 1 1.5 0v4.5a3.25 3.25 0 0 1-3.25 3.25H4.641Z"></path></svg>        </span>
         </div>
     </div>
@@ -123,7 +110,6 @@ const hit = ({ hit, selected }) => {
       <span>
         <Highlight attribute="product.name" hit={hit} />
       </span>
-      {/* <span>desc: <Highlight attribute='desc' hit={hit}/></span> */}
     </div>
   );
 };
@@ -138,17 +124,12 @@ export const SearchBar = () => {
     setActive(false)
     setSelect(-1)
 })
-  const CallSearch = async () => {
-    console.log(search);
-    // redirect on product page with products?query=Iphone
-    // axios.get("/api/search", {data: "adqd", method})
-  };
 
   const handleChange = async (e) => {
-    // set the search text when we typing
+    // set the search text when typing
     setSearch(e.target.value);
     if (e.target.value) {
-      // if have value
+      // if there is a value
       // do a get http request to get the search query
       // by passing the search value in query params
       // /api/search?q=phone
@@ -176,8 +157,8 @@ export const SearchBar = () => {
     
   }, [select])
 
+  // handle keybord key to search
   const handle = (e) => {    
-    // console.log(e);
     
     if(e.key === "ArrowDown"){
       if(!(items.length - 1 === select)){
@@ -195,13 +176,12 @@ export const SearchBar = () => {
       if(select !== -1){
         const item = items[select]
         if(item){
-          console.log(item);
           router.push(`/product/${item.id}`)
         }
       } else {
         if(router.pathname === "/products"){ // when on products pages
           const query = router.query
-          if(!search){ // when we want to remove the search by sent blank search
+          if(!search){ // when we want to remove the search by seding a blank search
             if(query['search']){
               delete query['search']
             }
@@ -230,8 +210,6 @@ export const SearchBar = () => {
               viewBox="0 0 20 20"
             >
               <path
-                // fill="currentColor"
-                // fillRule="evenodd"
                 d="M8 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8ZM2 8a6 6 0 1 1 10.89 3.476l4.817 4.817a1 1 0 0 1-1.414 1.414l-4.816-4.816A6 6 0 0 1 2 8Z"
                 clipRule="evenodd"
               ></path>

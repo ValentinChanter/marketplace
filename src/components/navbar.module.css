@@ -33,6 +33,7 @@ div.menuLogo {
 div.rightLogosContainer {
     display: flex;
     flex-direction: row;
+    
     margin-right: 24px;
 }
 
