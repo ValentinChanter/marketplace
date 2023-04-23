@@ -16,7 +16,7 @@ Notre implémentation a été réalisée en Typescript avec [Next.js](https://ne
 
 ### Mise en place 
 
-1. Clonez le repo en le téléchargeant ou avec
+1. Clonez le repository en le téléchargeant ou avec
 ```bash
 git clone https://github.com/ValentinChanter/marketplace
 cd marketplace
