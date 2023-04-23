@@ -41,10 +41,10 @@ export const ProductItem: FC<{product:any}> = ({product}) =>{
             </div>
             <div className="mt-5">
                 Quantité :
-                <div className="border-mkDarkGreen border w-fit ">
-                <button onClick={decQty} className="bg-mkDarkGreen  text-mkWhite px-2 hover:bg-mkGreen hover:text-mkDarkBlue ">-</button>
+                <div className="border-mkGreen border w-fit ">
+                <button onClick={decQty} className="bg-mkGreen  text-mkDarkBlue px-2 hover:bg-mkDarkGreen hover:text-mkWhite ">-</button>
                 <span className="mx-2">{qty}</span>
-                <button onClick={() => incQty(stock)}  className="bg-mkDarkGreen text-mkWhite px-2 hover:bg-mkGreen hover:text-mkDarkBlue ">+</button>
+                <button onClick={() => incQty(stock)}  className="bg-mkGreen text-mkDarkBlue px-2 hover:bg-mkDarkGreen hover:text-mkWhite ">+</button>
                 </div>
             </div>
             <button onClick={() => addToCart(product,qty)} className=" mt-5 relative overflow-hidden bg-transparent text-center uppercase text-base transition-[0.3s] z-[1] text-mkDarkGreen px-[1.8em] py-[0.8em] border-2 border-solid border-mkDarkGreen before:content-[''] before:w-0 before:h-[300%] before:absolute before:-translate-x-2/4 before:-translate-y-2/4 before:rotate-45 before:transition-[0.5s] before:duration-[ease] before:block before:z-[-1] before:left-2/4 before:top-2/4 hover:before:w-[105%] hover:text-white before:bg-mkDarkGreen"> Add to cart</button>
