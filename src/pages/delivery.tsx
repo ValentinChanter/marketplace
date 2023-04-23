@@ -21,7 +21,7 @@ export default function Delivery({user}: {user:User}) {
 		<>
 			<StatusLockedPage user={user} status="DELIVERY" f={async () => {
 				useEffect(() => {
-					currDate.setHours(0, 0, 0, 0);
+					currDate.setUTCHours(0, 0, 0, 0);
 
 					const body = {
 						id: user.id,
@@ -57,7 +57,6 @@ export default function Delivery({user}: {user:User}) {
 										if (!isLoading && checkMinusDate(currDate)) {
 											const newDate = new Date(currDate);
 											newDate.setDate(newDate.getDate() - 1);
-											newDate.setHours(0, 0, 0, 0);
 
 											setIsLoading(true);
 											setCurrDate(newDate);
@@ -81,6 +80,7 @@ export default function Delivery({user}: {user:User}) {
 														});
 													}
 												})
+												
 												setPackages(res.packages);
 												setIsLoading(false);
 											});
@@ -93,7 +93,6 @@ export default function Delivery({user}: {user:User}) {
 										if (!isLoading && checkPlusDate(currDate)) {
 											const newDate = new Date(currDate);
 											newDate.setDate(newDate.getDate() + 1);
-											newDate.setHours(0, 0, 0, 0)
 
 											setIsLoading(true);
 											setCurrDate(newDate);
@@ -117,6 +116,7 @@ export default function Delivery({user}: {user:User}) {
 														});
 													}
 												})
+
 												setPackages(res.packages);
 												setIsLoading(false);
 											});
