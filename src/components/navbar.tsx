@@ -40,7 +40,7 @@ export default function Navbar({
           {user !== null ? (
             <div className="relative group">
               <div className="m-4">
-                <Link href="/commandes">
+                <Link href="/orders">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="fill-mkDarkBlue"
@@ -54,7 +54,7 @@ export default function Navbar({
                 </Link>
                 <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-white rounded-b-md shadow-lg top-12 right-0">
                   <li>
-                    <Link href="/commandes">
+                    <Link href="/orders">
                       <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
                         Mes commandes
                       </p>
@@ -80,6 +80,7 @@ export default function Navbar({
                   </li>
                 </ul>
               </div>
+
             </div>
           ) : (
             

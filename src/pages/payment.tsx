@@ -10,7 +10,7 @@ export default function Payment({user}: {user:User}) {
     return (
         <Layout pageName={'Paiement accepté'} user={user}>
             <main>
-                <h1>Votre paiement a été accepté !</h1>
+                <h1>Votre commande a été acceptée !</h1>
                 <p>Retrouvez la dans votre espace "Mes commandes"</p>
                 <Link href="/products">
                     <button type="button" className="bg-mkOrange cursor-pointer text-base px-7 py-2 hover:bg-mkDarkOrange">
