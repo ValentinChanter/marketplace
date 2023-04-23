@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 const bcrypt = require("bcryptjs");
 
+// Vérifie qu'un email n'existe pas déjà dans la bdd, puis crée l'entrée dans la bdd avec les informations fournies (en hashant le mot de passe)
 async function signup(req: NextApiRequest, res: NextApiResponse) {
     const { firstName, lastName, email, password } = await req.body;
 

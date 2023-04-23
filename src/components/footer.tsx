@@ -15,9 +15,9 @@ export default function Footer() {
 
                 <div className={styles.verticalContainer}>
                     <p className={`${styles.footerText} text-mkDarkBlue`}>Besoin d'aide ?</p>
-                    <Link href="pages/contact" className={`${styles.link} text-mkDarkBlue`}>Contactez-nous !</Link>
+                    <Link href="/contact" className={`${styles.link} text-mkDarkBlue`}>Contactez-nous !</Link>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

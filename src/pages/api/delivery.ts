@@ -48,7 +48,7 @@ export default async function delivery(req: NextApiRequest, res: NextApiResponse
 
                 return {
                     infos: {
-                        id: pack.orderId,
+                        id: pack.id,
                         firstName: pack.order.buyer.firstName,
                         lastName: pack.order.buyer.lastName,
                         address: pack.address,

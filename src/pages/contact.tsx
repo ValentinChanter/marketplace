@@ -8,7 +8,7 @@ export default function privacy({user}: {user:User}) {
 	return (
 		<Layout pageName="Contact" user={user}>
 			<div className='flex flex-col'>
-                <p className='text-justify'>N'hésitez pas à nous contacter à l'adresse e-mail suivante : marketplace@cy-tech.fr. Nous ferons de notre mieux pour répondre à vos demandes dans les meilleurs délais.</p>
+                <p className='text-justify'>N'hésitez pas à nous contacter à l'adresse e-mail suivante : nook@cy-tech.fr. Nous ferons de notre mieux pour répondre à vos demandes dans les meilleurs délais.</p>
 			</div>
 		</Layout>
 	)

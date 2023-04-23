@@ -3,7 +3,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-import L from "leaflet";
+import L, { routing } from "leaflet";
 import "leaflet-routing-machine";
 import { LatLngExpression } from 'leaflet';
 import { useEffect } from 'react';
@@ -17,9 +17,9 @@ export function ChangeView({ coords }: { coords: LatLngExpression }) {
 
 export function Routing({addresses}: {addresses: any}) {
     const map = useMap();
-  
+
     useEffect(() => {
-        if (!map) return;
+        if (!addresses) return; // S'il n'y a pas de carte à afficher, on ne fait rien
 
         const waypoints = addresses.map((address:any) => L.latLng(address.lat, address.lng));
         waypoints.push(waypoints[0]);
@@ -38,8 +38,8 @@ export function Routing({addresses}: {addresses: any}) {
             }
         }).addTo(map);
   
-      return () => map.removeControl(routingControl);
-    }, [map]);
+        return () => map.removeControl(routingControl);
+    }, [map, addresses]);
   
     return null;
 }

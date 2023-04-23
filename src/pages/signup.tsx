@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Layout from '@/components/layout';
-import SignupForm from "@/components/signupForm";
+import SignupForm from '@/components/signupForm';
 import fetchJson, { FetchError } from "@/lib/fetchJson";
 
 import { GetServerSideProps } from 'next'
@@ -23,7 +23,7 @@ export default function Login({user}: {user:User}) {
                         errorMessage={errorMsg}
                         successMessage={successMsg}
                         onSubmit={async function handleSubmit(event) {
-                            const sMsg = "Inscription réussie ! Vous serez redirigé dans quelques instants...";
+                            const sMsg = "Inscription réussie ! Vous serez redirigé(e) dans quelques instants...";
 
                             event.preventDefault();
                             if (successMsg === sMsg) return; // Si l'inscription est déjà réussie (i.e. si sMsg est actuellement affiché), on veut empêcher les interactions entre l'utilisateur et le bouton
