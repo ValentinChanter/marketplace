@@ -3,12 +3,16 @@ import { toast } from 'react-hot-toast';
 
 const Context = createContext();
 
-// Déclaration des variables d'état
 export const StateContext = ({ children }) => {
+
+    // Déclaration des variables d'état
+    // Pour le panier
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalQty, setTotalQty] = useState(0);
     const [qty, setQty] = useState(1);
+    // Autres
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
 
     // Monter / Baisser la quantité de produits à mettre dans le panier 
@@ -29,15 +33,15 @@ export const StateContext = ({ children }) => {
     // Changer la quantité de chaque produit individuellement dans le panier
     const toggleQty = (product, value) => {
         let toChange = cartItems.find((item) => item.id === product.id);
+        // Prendre tous les cartItems sauf le produit à changer
         const newCartItems = cartItems.filter((item) => item.id !== product.id);
         
         // Si on appuie sur +
         if (value === 'inc') {
           if (toChange.quant < product.quantity) {
-            const updatedCart = [
-              ...newCartItems,
-              { ...toChange, quant: toChange.quant + 1 },
-            ];
+            // Rajouter le produit avec sa nouvelle quantité
+            const updatedCart = cartItems.map(
+              toChange => (toChange.id === product.id ? { ...toChange, quant: toChange.quant + 1 } : toChange));
 
             const newTotalPrice = totalPrice + toChange.price * 1;
             setCartItems(updatedCart);
@@ -48,10 +52,8 @@ export const StateContext = ({ children }) => {
         // Et sur -
         } else if (value === 'dec') {
           if (toChange.quant > 1) {
-            const updatedCart = [
-              ...newCartItems,
-              { ...toChange, quant: toChange.quant - 1 },
-            ];
+            const updatedCart = cartItems.map(
+              toChange => (toChange.id === product.id ? { ...toChange, quant: toChange.quant - 1 } : toChange));
       
             const newTotalPrice = totalPrice - toChange.price;
             setCartItems(updatedCart);
@@ -108,7 +110,7 @@ export const StateContext = ({ children }) => {
         <Context.Provider
             value={{    // Info qu'on veut garder dans tt le site
                 cartItems, totalPrice, totalQty, qty,
-                setCartItems, setTotalPrice, setTotalQty,
+                setCartItems, setTotalPrice, setTotalQty, setIsSubscribed,
                 incQty, decQty, toggleQty, addToCart, removeFromCart
             }}
         >

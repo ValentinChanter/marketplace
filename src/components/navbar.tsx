@@ -40,12 +40,12 @@ export default function Navbar({pageName, user}: {pageName:string, user:User}) {
                     {user !== null ? (
                         <div className='relative group'>
                             <div className={styles.userLogo}>
-                                <Link href="/commandes">
+                                <Link href="/orders">
                                     <Image src="/user.png" fill sizes='100vw' alt="Profil"/>
                                 </Link>
                                 <ul className="absolute z-10 hidden group-hover:block mt-1 py-2 w-48 bg-white rounded-b-md shadow-lg top-12 right-0">
                                     <li>
-                                        <Link href="/commandes">
+                                        <Link href="/orders">
                                             <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 transition duration-150 ease-in-out">
                                                 Mes commandes
                                             </p>

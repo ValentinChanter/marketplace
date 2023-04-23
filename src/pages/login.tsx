@@ -13,7 +13,7 @@ import { User } from "@/pages/api/user"
 export default function Login({user}: {user:User}) {
   // here we just check if user is already logged in and redirect to profile
   const { mutateUser } = useUser({
-    redirectTo: "/commandes",
+    redirectTo: "/orders",
     redirectIfFound: true,
   });
 
