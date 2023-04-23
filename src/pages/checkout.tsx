@@ -60,51 +60,56 @@ export default function Checkout({user}: {user:User}) {
             // Utilisateur renvoyé à la page de login si non connecté
             <StatusLockedPage user={user} status="CLIENT">
                 <Layout pageName="Checkout" user={user}>
-                    <main className="">
-                        <h1 className="text-xl">Récapitulatif de votre commande</h1>
-                        <div className="">
+                    <div className=" flex flex-col justify-center items-center">
+                        <h1 className="text-3xl font-bold text-mkDarkBlue mb-7">Récapitulatif de votre commande</h1>
+                        <div className="bg-mkWhite p-5 rounded flex flex-col justify-center items-center w-auto">
                             <div>
-                                {cartItems.map((product: any) => (
-                                    <div key={product.id} className="flex justify-center">
-                                        <img src={product.product.thumbnail} alt={product.name} className="w-auto max-h-48 object-cover rounded-lg" />
-                                        <div className="flex justify-between text-mkDarkGreen">
-                                            <h3>{product.quant}x {product.product.name}</h3>
-                                            <h2 className="font-bold mx-20">{product.price * product.quant}€</h2>
+                                <div className="mb-5">
+                                    {cartItems.map((product: any) => (
+                                        <div key={product.id} className="flex justify-center">
+                                            <div className="flex space-x-2 text-mkDarkGreen text-center">
+                                                <div>
+                                                    <h3>{product.quant}x {product.product.name}</h3>
+                                                </div>
+                                                <div>
+                                                    <h2 className="font-bold mx-20 text-right">{product.price * product.quant}€</h2>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
+                                    ))}
+                                </div>
+                                <hr></hr>
 
-                            <h1>Adresse de livraison</h1>
-                            <div className="flex justify-center w-3/5"> 
-                                <form onSubmit={handleSubmit}>
-                                    <label className="block"> Adresse : 
-                                        <input type="text" name="address" required className="border"/>
-                                    </label>
-                                    <label className="block"> Code postal: 
-                                        <input type="text" name="postalCode" required className="border"/>
-                                    </label>
-                                    <label className="block"> Ville: 
-                                        <input type="text" name="city" required className="border"/>
-                                    </label>
+                                <h1 className="text-center m-5 text-mkDarkBlue font-bold text-lg">Adresse de livraison</h1>
+                                <div className="items-center justify-center w-3/5 ml-20"> 
+                                    <form onSubmit={handleSubmit}>
+                                        <label className="block"> Adresse : 
+                                            <input type="text" name="address" required className="border"/>
+                                        </label>
+                                        <label className="block"> Code postal: 
+                                            <input type="text" name="postalCode" required className="border"/>
+                                        </label>
+                                        <label className="block"> Ville: 
+                                            <input type="text" name="city" required className="border"/>
+                                        </label>
 
-                                    <div>
-                                        <p> Livraison : {shipping}€</p>
-                                    </div>
+                                        <div>
+                                            <p className="text-center mt-5"> Livraison : {shipping}€</p>
+                                        </div>
 
-                                    <div>
-                                        <h3>{totalQty} articles</h3>
-                                        <h2 className="text-lg justify-center text-mkDarkOrange font-bold">Total : {totalPrice + shipping } €</h2>
-                                    </div>
+                                        <div className="text-center">
+                                            <h3>{totalQty} articles</h3>
+                                            <h2 className="mt-2 text-lg justify-center text-mkDarkOrange font-bold">Total : {totalPrice + shipping } €</h2>
+                                        </div>
 
-                                    <button type="submit" className="bg-mkOrange rounded cursor-pointer text-base px-7 py-2 hover:bg-mkDarkOrange">
-                                        Confirmer la commande
-                                    </button>
-                                </form>
+                                        <button type="submit" className="bg-mkOrange rounded cursor-pointer text-base px-7 py-2 hover:bg-mkDarkOrange w-80 mt-5 mr-20">
+                                            Confirmer la commande
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    
-                    </main>
+                    </div>
                 </Layout>
             </StatusLockedPage>
         )   

@@ -41,17 +41,17 @@ export default function Orders({user}: {user:User}) {
             
         }}>
             <Layout pageName="Mes commandes" user={user}>
-                <div>
-                    <h1>Suivez ici la livraison de vos commandes</h1>
+                <div className="bg-mkWhite p-5 rounded flex flex-col justify-center items-center">
+                    <h1 className="text-2xl font-bold text-mkDarkBlue mb-10 mt-5">Suivez ici la livraison de vos commandes</h1>
 
                     {packages.sort((a, b) => a.id - b.id).map((pkg) => (
                         <div key={pkg.id} className="flex">
-                            <h2 className="mr-5">Commande n°{pkg.id}</h2>
+                            <h2 className="mr-5 text-mkDarkGreen font-bold">Commande n°{pkg.id}</h2>
                             <div>
-                                <p>Livré: {pkg.delivered ? 'Oui' : 'Non'}</p>
+                                <p className="text-mkDarkOrange font-bold">Livré: {pkg.delivered ? 'Oui' : 'Non'}</p>
                                 <p>Date de livraison estimée: {format(new Date(pkg.deliveryDate), 'dd/MM/yyyy')}</p>
                                 <p>Adresse de livraison: {pkg.address}</p>
-                                <p>Prix total: {pkg.order.price}€ </p>
+                                <p>Prix total: {pkg.order.price}€ </p> <br></br>
                             </div>
                         </div>
                     ))}
