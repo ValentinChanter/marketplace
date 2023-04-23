@@ -7,12 +7,15 @@ export const useOuterClick = (callback: (ev:any) => void) => {
     useEffect(()=> { callbackRef.current = callback;});
     
     useEffect(()=>{
-        document.addEventListener("click", handleClick);
-        return() => document.removeEventListener("click", handleClick);
         function handleClick(e:any){
             if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)
             ) callbackRef.current(e);
         }
+        // register a click on the document 
+        document.addEventListener("click", handleClick);
+        // remove the handle click
+        return() => document.removeEventListener("click", handleClick);
+
     }, []);
     return innerRef;
 }
