@@ -99,7 +99,7 @@ export default function Checkout({user}: {user:User}) {
 
                                         <div className="text-center">
                                             <h3>{totalQty} articles</h3>
-                                            <h2 className="mt-2 text-lg justify-center text-mkDarkOrange font-bold">Total : {totalPrice + shipping } €</h2>
+                                            <h2 className="mt-2 text-lg justify-center text-mkDarkOrange font-bold">Total : {Number(totalPrice + shipping ).toFixed(2)}€</h2>
                                         </div>
 
                                         <button type="submit" className="bg-mkOrange rounded cursor-pointer text-base px-7 py-2 hover:bg-mkDarkOrange w-80 mt-5 mr-20">
