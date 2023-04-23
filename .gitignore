@@ -37,3 +37,7 @@ next-env.d.ts
 
 # prisma
 /src/.env
+
+pnpm-lock.yaml
+package-lock.json
+.env

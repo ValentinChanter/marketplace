@@ -11,6 +11,7 @@ module.exports = {
         mkGreen: '#a8dbcc',
         mkWhite: '#f5f5f5',
         mkOrange: '#efb99c',
+        mkDarkOrange: '#e7a08c',
       }
     },
   },
