@@ -18,6 +18,6 @@ export default function Footer() {
                     <Link href="/contact" className={`${styles.link} text-mkDarkBlue`}>Contactez-nous !</Link>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

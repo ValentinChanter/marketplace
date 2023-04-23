@@ -23,21 +23,21 @@ export default function Navbar({
   return (
     <>
       <div className={`${styles.container} bg-mkGreen`}>
-        <div className="flex flex-row mx-auto ml-[24px]">
+        <div className={styles.leftLogosContainer}>
           {/* <div className="my-auto mr-[24px]">
                         <Image src="/menu.png" width={40} height={40} alt="Menu latéral" />
                     </div> */}
 
           <div className="my-auto mr-[24px]">
             <Link href="/">
-              <Image src="/logo.png" width={200} height={50} alt="Logo" />
+              <Image src="/logo.png" width={150} height={45} alt="Logo" />
             </Link>
           </div>
         </div>
 
         <SearchBar />
 
-        <div className="flex flex-row mr-[24px]">
+        <div className="flex flex-row mr-6 items-center gap-6">
           {user && user !== null ? (
             <div className="relative group">
               <div>

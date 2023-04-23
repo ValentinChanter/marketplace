@@ -34,6 +34,7 @@ export default async function handler(
         seller: true,
         product: true,
       },
+      take: 10
     });
     res.status(200).json(products);
   } else {
@@ -44,6 +45,7 @@ export default async function handler(
           mode: "insensitive",
         },
       },
+      take: 10
     });
     res.status(200).json(products);
   }
