@@ -4,51 +4,16 @@ div.container {
     justify-content: space-between;
     height: 64px;
     width: 100%;
-    background-color: white;
     box-shadow:
     0 0 1px 1px rgb(29 17 51 / 4%),
     0 0 3px 2px rgb(9 32 77 / 12%),
     0 0 2px -3px rgb(29 17 51 / 12%);
 }
-
-div.leftLogosContainer {
-    display: flex;
-    flex-direction: row;
-    margin: auto 0 auto 24px;
-}
-
-div.logo {
-    margin: auto 24px auto 0;
-    width: 200px;
-    height: 50px;
-    position: relative;
-}
-
-div.menuLogo {
-    margin: auto 24px auto 0;
-    width: 40px;
-    height: 40px;
-    position: relative;
-}
-
-div.rightLogosContainer {
-    display: flex;
-    flex-direction: row;
-    margin: auto 24px auto 0;
-}
-
-div.squareLogo {
-    margin: auto 0 auto 24px;
-    width: 40px;
-    height: 40px;
-    position: relative;
-}
-
 div.searchBar {
     width: 70%;
 }
 
-div.searchForm {
+form.searchForm {
     display: flex;
     width: 65%;
     height: 100%;

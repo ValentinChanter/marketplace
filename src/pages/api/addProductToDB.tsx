@@ -11,7 +11,7 @@ export default async function handler(
     data: {
       name: productData.name,
       desc: productData.desc,
-      imgUrl: "Monke",
+      imgUrl: productData.imgUrl,
       category: productData.category,
     },
   });
@@ -19,11 +19,12 @@ export default async function handler(
   const test2 = await prisma.productBySeller.create({
     data: {
       productId: test.id,
-      sellerId: "clgnrp51700026e9lc0p9xkw7",
+      sellerId: productData.userId,
       quantity: productData.quantity,
       price: productData.price,
     },
   });
-  console.log(test2);
+
+  console.log(productData);
   res.status(200).json(productData);
 }
