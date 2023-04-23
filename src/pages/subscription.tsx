@@ -4,6 +4,7 @@ import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import useUser from '@/lib/useUser';
+import { toast } from 'react-hot-toast';
 
 import { GetServerSideProps } from 'next'
 import { withIronSessionSsr } from "iron-session/next";
@@ -19,7 +20,9 @@ export default function Subscription({user}: {user:User}) {
     });
   
     const [isSubscribed, setIsSubscribed] = useState(false);
-  
+    const router = useRouter();
+
+
     useEffect(() => {
         // Récupérer la valeur de isSubscribed dans localStorage
         const storedIsSubscribed = localStorage.getItem('isSubscribed');
@@ -43,7 +46,8 @@ export default function Subscription({user}: {user:User}) {
           if (res) {
             setIsSubscribed(res.isSubscribed);
             localStorage.setItem('isSubscribed', JSON.stringify(res.isSubscribed));
-          }
+            router.push('/');
+            {isSubscribed ? toast.success("Vous avez été désabonné") : toast.success("Vous êtes désormais abonné")};}
         } catch (error) {
           console.error(error);
         }
