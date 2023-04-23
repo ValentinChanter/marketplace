@@ -50,10 +50,10 @@ export default function Delivery({user}: {user:User}) {
 				}, [])
 			}}>
 				<Layout pageName={"Mes livraisons"} user={user}>
-					<div className="flex flex-col w-full">
+					<div className="flex flex-col w-full p-24">
 						<p className="text-4xl font-bold">Bonjour {user?.name} !</p>
 						<br />
-						<div className="p-5 border rounded-md">
+						<div className="p-5 border rounded-md bg-mkWhite">
 							<div>
 								<div className="flex flex-row justify-center">
 									<button className={`text-mkDarkBlue rounded-full bg-mkOrange w-9 h-9 mr-5 shadow" ${isLoading || !checkMinusDate(currDate) ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e7a08c] active:shadow-sm hover:shadow-md hover:-translate-y-1 active:-translate-y-0 active:bg-mkOrange transition-all"}`} onClick={() => {

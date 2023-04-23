@@ -20,8 +20,8 @@ export default function Login({ user }: { user: User }) {
 
   return (
     <Layout pageName={"Connexion"} user={user}>
-      <div className="flex justify-center mt-10">
-        <div className="w-1/3 border-solid border-2 rounded p-5 my-0">
+      <div className="flex justify-center mt-10 p-24">
+        <div className="w-1/3 border-solid border-2 rounded p-5 my-0 bg-mkWhite">
           <p className="font-semibold text-lg">Déjà client ?</p>
           <br />
           <LoginForm

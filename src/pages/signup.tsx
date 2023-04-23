@@ -16,7 +16,7 @@ export default function Login({user}: {user:User}) {
     return (
         <>
             <Layout pageName={"Inscription"} user={user}>
-            <div className="flex justify-center mt-10">
+            <div className="flex justify-center mt-10 p-24">
                 <div className="w-1/2 border-solid border-2 rounded p-5 my-auto bg-mkWhite">
                     <p className="font-semibold text-lg mb-8">Pas encore inscrit ?</p>
                     <SignupForm 

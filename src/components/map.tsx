@@ -3,7 +3,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-import L, { routing } from "leaflet";
+import L from "leaflet";
 import "leaflet-routing-machine";
 import { LatLngExpression } from 'leaflet';
 import { useEffect } from 'react';
