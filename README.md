@@ -27,6 +27,14 @@ cd marketplace
 npm install
 ```
 
+3. Placez le fichier `.env` dans `./src` si disponible
+
+4. Générez le client Prisma
+```bash
+cd src
+npx prisma generate
+```
+
 ## Accès au serveur de développement
 
 1. Lancez le serveur
